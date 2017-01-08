@@ -16,6 +16,11 @@
                             <div class="alert alert-danger">
                                 {{ session(('error')) }}
                             </div>
+                        @elseif(session('success'))
+                            <div class="alert alert-success" role="alert">
+
+                                {{ Session::get('success') }}
+                            </div>
                         @endif
                         <div class="form-group">
                             <div class="input-group">

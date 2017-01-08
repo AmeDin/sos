@@ -9,4 +9,8 @@ class Stall extends Model
     protected $fillable = [
         'name', 'user_id', 'image_id'
     ];
+
+    public function image() {
+    return $this->hasOne('App\Image');
+}
 }

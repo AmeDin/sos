@@ -10,6 +10,7 @@ use App\User;
 use Mail;
 use Validator;
 use \Illuminate\Database\QueryException;
+use Session;
 
 
 class RegistrationController extends Controller
@@ -32,6 +33,7 @@ class RegistrationController extends Controller
             $role->users()->attach($user);
 
             $this->sendEmail($user, $activation->code);
+            Session::flash('success', 'Registration successful, please check your mail for he activation link.');
             return redirect('/');
         }catch (QueryException $e){
             $err = $e->getMessage();

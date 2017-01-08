@@ -24,7 +24,7 @@ class LoginController extends Controller
                 if($slug == 'admin')
                     return redirect('/earnings');
                 elseif($slug == 'svendor')
-                    return redirect('/landing');
+                    return redirect('/stalls');
             }else{
                 return redirect()->back()->with(['error' => 'Wrong credentials.']);
             }

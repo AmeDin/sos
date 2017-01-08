@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/', function () {return view('welcome');});
+Route::get('/activate/{email}/{activationCode}', 'ActivationController@activate');
 
 Route::group(['middleware' => 'visitors'], function(){
     Route::get('/register', 'RegistrationController@register');
@@ -26,7 +26,7 @@ Route::group(['middleware' => 'visitors'], function(){
 });
 
 Route::group(['middleware' => 'vendor'], function(){
-    Route::get('/landing', 'VendorController@landing');
+    Route::get('/landing', 'VendorController@landing')->name('vendorhome');
     Route::resource('stalls', 'StallsController');
 
 });
@@ -40,5 +40,3 @@ Route::group(['middleware' => 'admin' || 'vendor'], function(){
     Route::post('/logout', 'LoginController@logout');
 
 });
-
-Route::get('/activate/{email}/{activationCode}', 'ActivationController@activate');

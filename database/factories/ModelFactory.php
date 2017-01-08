@@ -77,6 +77,87 @@ $factory->define(App\RoleUser::class, function (Faker\Generator $faker) use ($au
 
 });
 
+$autoIncrement = autoIncrement();
+
+$factory->define(App\Category::class, function (Faker\Generator $faker) use ($autoIncrement) {
+    $categories = ['Staples', 'Meat', 'Vegetable', 'Seafood', 'Nut', 'Sauce', 'Drinks', 'Desert'];
+    $autoIncrement->next();
+    return [
+        'name' => $categories[$autoIncrement->current()-1]
+    ];
+
+
+});
+
+$autoIncrement = autoIncrement();
+
+$factory->define(App\Ingredient::class, function (Faker\Generator $faker) use ($autoIncrement) {
+    $autoIncrement->next();
+
+    // 16 ingredients atm
+    $ingredients = [['White Rice', 0.50, 1], ['Lemak Rice', 1.00, 1], ['Seasoned Rice', 1.00, 1],
+                    ['Whole Chicken', 6.50, 2], ['1/2 Chicken', 4.00, 2], ['Small Chicken', 1.50, 2],
+                    ['Carrot', 0.20, 3], ['Lettuce', 0.20, 3], ['Onion', 0.2, 3], ['Cucumber', 0.2, 3],
+                    ['Trout', 3.50, 4], ['Salmon', 4.00, 4], ['Tilapia', 1.50, 4], ['Prawn', 1.50, 4],
+                    ['Sambal', 0.00, 6], ['Mayonnaise', 0.00, 6]]
+    ;
+    return [
+        'name' => $ingredients[$autoIncrement->current()-1][0],
+        'price' => $ingredients[$autoIncrement->current()-1][1],
+        'category_id' => $ingredients[$autoIncrement->current()-1][2]
+    ];
+
+
+});
+
+$autoIncrement = autoIncrement();
+
+$factory->define(App\Ingredient::class, function (Faker\Generator $faker) use ($autoIncrement) {
+    $autoIncrement->next();
+
+    // 16 ingredients atm
+    $ingredients = [['White Rice', 0.50, 1], ['Lemak Rice', 1.00, 1], ['Seasoned Rice', 1.00, 1],
+        ['Whole Chicken', 6.50, 2], ['1/2 Chicken', 4.00, 2], ['Small Chicken', 1.50, 2],
+        ['Carrot', 0.20, 3], ['Lettuce', 0.20, 3], ['Onion', 0.2, 3], ['Cucumber', 0.2, 3],
+        ['Trout', 3.50, 4], ['Salmon', 4.00, 4], ['Tilapia', 1.50, 4], ['Prawn', 1.50, 4],
+        ['Sambal', 0.00, 6], ['Mayonnaise', 0.00, 6]]
+    ;
+    return [
+        'name' => $ingredients[$autoIncrement->current()-1][0],
+        'price' => $ingredients[$autoIncrement->current()-1][1],
+        'category_id' => $ingredients[$autoIncrement->current()-1][2]
+    ];
+
+
+});
+
+$autoIncrement = autoIncrement();
+
+$factory->define(App\Nutrition::class, function (Faker\Generator $faker) use ($autoIncrement) {
+    $autoIncrement->next();
+
+    // 16 ingredients atm
+    $nutritions = [[100, 200, 5, 0, 10, 3, 10], [100, 200, 5, 0, 10, 3, 10],  [100, 200, 5, 0, 10, 3, 10],
+        [100, 200, 5, 0, 10, 3, 10], [100, 200, 5, 0, 10, 3, 10], [100, 200, 5, 0, 10, 3, 10],
+        [100, 200, 5, 0, 10, 3, 10], [100, 200, 5, 0, 10, 3, 10], [100, 200, 5, 0, 10, 3, 10],
+        [100, 200, 5, 0, 10, 3, 10], [100, 200, 5, 0, 10, 3, 10], [100, 200, 5, 0, 10, 3, 10],
+        [100, 200, 5, 0, 10, 3, 10], [100, 200, 5, 0, 10, 3, 10], [100, 200, 5, 0, 10, 3, 10],
+        [100, 200, 5, 0, 10, 3, 10]]
+    ;
+    return [
+        'calories' => $nutritions[$autoIncrement->current()-1][0],
+        'carbohydrate' => $nutritions[$autoIncrement->current()-1][1],
+        'saturate_fat' => $nutritions[$autoIncrement->current()-1][2],
+        'trans_fat' => $nutritions[$autoIncrement->current()-1][3],
+        'fibre' => $nutritions[$autoIncrement->current()-1][4],
+        'sugar' => $nutritions[$autoIncrement->current()-1][5],
+        'protein' => $nutritions[$autoIncrement->current()-1][6],
+        'ingredient_id' => $autoIncrement->current()
+    ];
+
+
+});
+
 function autoIncrement()
 {
     for ($i = 0; $i < 1000; $i++) {

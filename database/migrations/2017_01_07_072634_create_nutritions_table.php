@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCategorysTable extends Migration
+class CreateNutritionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,16 @@ class CreateCategorysTable extends Migration
      */
     public function up()
     {
-        Schema::create('categorys', function (Blueprint $table) {
+        Schema::create('nutritions', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('calories');
+            $table->decimal('carbohydrate');
+            $table->decimal('saturate_fat');
+            $table->decimal('trans_fat');
+            $table->decimal('fibre');
+            $table->decimal('sugar');
+            $table->decimal('protein');
+            $table->integer('ingredient_id');
             $table->timestamps();
 
             $table->engine = 'InnoDB';
@@ -30,6 +37,6 @@ class CreateCategorysTable extends Migration
      */
     public function down()
     {
-        Schema::drop('categorys');
+        Schema::drop('nutritions');
     }
 }

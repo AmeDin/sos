@@ -11,7 +11,6 @@ use App\Stall;
 use Auth;
 use Sentinel;
 use Image;
-use App\ImageStuff;
 
 class StallsController extends Controller
 {
@@ -22,7 +21,17 @@ class StallsController extends Controller
      */
     public function index()
     {
+        $stalls = Stall::where('user_id', Sentinel::getUser()->id)->get();
 
+        $imgArray = [];
+        for($i=0; $i<count($stalls); $i++){
+            $img = \App\Image::where('id', $stalls[$i]['image_id'])->get();
+            array_push($imgArray, $img);
+        }
+        return view('vendors.landing')
+                    ->withStalls($stalls)
+                    ->with('images', $imgArray)
+                    ->with('count', 0);
     }
 
     /**
@@ -54,7 +63,7 @@ class StallsController extends Controller
             $location = public_path('images/' . $filename);
             Image::make($img)->resize(800, 600)->save($location);
 
-            $image = new ImageStuff;
+            $image = new \App\Image();
             $image->url = $filename;
             $image->save();
 
@@ -77,7 +86,10 @@ class StallsController extends Controller
     public function show($id)
     {
         $stall = Stall::find($id);
-        return view('stalls.show')->with('stall', $stall);
+        $img = \App\Image::where('id', $stall['image_id'])->get();
+        return view('stalls.show')
+                ->with('stall', $stall)
+                ->with('img', $img);
     }
 
     /**
@@ -88,7 +100,9 @@ class StallsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $stall = Stall::find($id);
+        $img = \App\Image::where('id', $stall['image_id'])->get();
+        return view('stalls.edit')->with('stall',$stall)->with('img', $img);
     }
 
     /**
@@ -100,7 +114,32 @@ class StallsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, array(
+            'name' => 'required|max:255'
+        ));
+        $stall = Stall::find($id);
+
+        $stall->name = $request->input('name');
+
+        if($request->hasFile('image'))
+        {
+            $img = $request->file('image');
+            $filename = time() . '.' . $img->getClientOriginalName();
+            $location = public_path('images/' . $filename);
+            Image::make($img)->resize(800, 600)->save($location);
+
+            $image = new \App\Image();
+            $image->url = $filename;
+            $image->save();
+
+            $stall->image_id = $image->id;
+
+        }
+
+        $stall->save();
+        Session::flash('success', 'Stall is successfully updated');
+        return redirect()->route('stalls.show', $stall->id);
+
     }
 
     /**
@@ -111,6 +150,9 @@ class StallsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $stall = Stall::find($id);
+        $stall -> delete();
+        Session::flash('success', 'Stall is successfully deleted');
+        return redirect()->route('vendorhome');
     }
 }

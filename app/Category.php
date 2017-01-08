@@ -4,12 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ImageStuff extends Model
+class Category extends Model
 {
-
-    protected $table = 'images';
-
     protected $fillable = [
-        'url'
+        'name'
     ];
 }
