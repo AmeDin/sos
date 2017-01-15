@@ -3,14 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Stall;
 use Input;
 use Validator;
 use Redirect;
 use Session;
-use App\Stall;
 use Auth;
 use Sentinel;
 use Image;
+use App\Dish;
 
 class StallsController extends Controller
 {
@@ -23,14 +24,8 @@ class StallsController extends Controller
     {
         $stalls = Stall::where('user_id', Sentinel::getUser()->id)->get();
 
-        $imgArray = [];
-        for($i=0; $i<count($stalls); $i++){
-            $img = \App\Image::where('id', $stalls[$i]['image_id'])->get();
-            array_push($imgArray, $img);
-        }
         return view('vendors.landing')
                     ->withStalls($stalls)
-                    ->with('images', $imgArray)
                     ->with('count', 0);
     }
 
@@ -86,10 +81,10 @@ class StallsController extends Controller
     public function show($id)
     {
         $stall = Stall::find($id);
-        $img = \App\Image::where('id', $stall['image_id'])->get();
+        $dishes = Dish::where('stall_id', $id)->get();
         return view('stalls.show')
                 ->with('stall', $stall)
-                ->with('img', $img);
+                ->with('dishes', $dishes);
     }
 
     /**
@@ -101,8 +96,7 @@ class StallsController extends Controller
     public function edit($id)
     {
         $stall = Stall::find($id);
-        $img = \App\Image::where('id', $stall['image_id'])->get();
-        return view('stalls.edit')->with('stall',$stall)->with('img', $img);
+        return view('stalls.edit')->with('stall',$stall);
     }
 
     /**

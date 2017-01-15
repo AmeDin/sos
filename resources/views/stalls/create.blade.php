@@ -6,6 +6,9 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     Create Stall
+                    <a href="{{ route('stalls.index') }}">
+                        <span class="glyphicon glyphicon-remove pull-right"></span>
+                    </a>
                 </div>
 
                 <div class="panel-body">

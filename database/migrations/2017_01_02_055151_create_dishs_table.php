@@ -13,7 +13,7 @@ class CreateDishsTable extends Migration
      */
     public function up()
     {
-        Schema::create('dishs', function (Blueprint $table) {
+        Schema::create('dishes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->integer('stall_id');
@@ -32,6 +32,6 @@ class CreateDishsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('dishs');
+        Schema::drop('dishes');
     }
 }

@@ -22,8 +22,8 @@
                                     @foreach($stalls as $stall)
                                         <tr>
                                             <th>{{ $stall->id }}</th>
-                                            <td>{{ $stall->name }}</td>
-                                            <td><img src="{{asset('images/' . $images[$count][0]['url'])}} " height="100" width="100"/></td>
+                                            <td><a href="{{ route('stalls.show', $stall->id) }}">{{ $stall->name }}</a></td>
+                                            <td><img src="{{asset('images/' . $stall->image->url )}} " height="100" width="100"/></td>
                                             <td>
                                                 {!! Form::open(['route' => ['stalls.destroy', $stall->id,], 'method' => 'DELETE']) !!}
                                                 {!! Form::submit('Delete') !!}
@@ -31,13 +31,11 @@
                                             </td>
                                             <td><button onclick="location.href='{{ route('stalls.edit', $stall->id) }}'">Edit</button></td>
                                         </tr>
-                                        <div class="text-hide">{{ $count ++ }}</div>
+
                                     @endforeach
                                         <button class="btn-success pull-right" onclick="location.href='{{ route('stalls.create') }}'"> Add Stall </button>
                                 @else
-                                    <div class="alert alert-danger">
-                                        No stalls found. click add button to create one. <button class="btn-success pull-right" onclick="location.href='{{ route('stalls.create') }}'"> Add </button>
-                                    </div>
+                                    @include('partials._nostall')
                                 @endif
                             </tbody>
                         </table>

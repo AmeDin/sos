@@ -28,7 +28,7 @@ Route::group(['middleware' => 'visitors'], function(){
 Route::group(['middleware' => 'vendor'], function(){
     Route::get('/landing', 'VendorController@landing')->name('vendorhome');
     Route::resource('stalls', 'StallsController');
-
+    Route::resource('dishes', 'DishesController');
 });
 
 Route::group(['middleware' => 'admin'], function(){

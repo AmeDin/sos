@@ -13,7 +13,7 @@ class CreateDishsIngredientsTable extends Migration
      */
     public function up()
     {
-        Schema::create('dishs_ingredients', function (Blueprint $table) {
+        Schema::create('dish_ingredient', function (Blueprint $table) {
             $table->integer('dish_id');
             $table->integer('ingredient_id');
             $table->timestamps();
@@ -29,6 +29,6 @@ class CreateDishsIngredientsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('dishs_ingredients');
+        Schema::drop('dish_ingredient');
     }
 }

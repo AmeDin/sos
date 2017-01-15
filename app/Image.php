@@ -10,8 +10,6 @@ class Image extends Model
         'url'
     ];
 
-    public function stall() {
-        return $this->hasOne('App\Stall');
-    }
+    
 
 }

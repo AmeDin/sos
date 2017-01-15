@@ -17,7 +17,6 @@ class CreateImagesTable extends Migration
             $table->increments('id');
             $table->string('url');
             $table->timestamps();
-
             $table->engine = 'InnoDB';
             $table->unique('id');
         });
