@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.ame-master')
 
 @section('content')
     <style>
@@ -42,7 +42,11 @@
                         @endforeach
                         </tbody>
                     </table>
-                        <button class="btn-danger pull-right" onclick="location.href='{{ route('stalls.show', $dish->stall_id) }}'"> Back </button>
+                        <button class="btn-danger pull-left" onclick="location.href='{{ route('stalls.show', $dish->stall_id) }}'"> Back </button>
+                        <button class="btn-success pull-right" onclick="location.href='{{ route('dishes.edit', $dish->id) }}'">Edit</button>
+                        {!! Form::open(array('route' => ['dishes.destroy', $dish->id,], 'class'=>'pull-right','method' => 'DELETE')) !!}
+                        {!! Form::submit('Delete', array('class'=>'btn-danger')) !!}
+                        {!! Form::close() !!}
                     </div>
                 </div>
             </div>

@@ -12,7 +12,8 @@
 */
 
 
-Route::get('/', function () {return view('welcome');});
+//Route::get('/', function () {return view('welcome');});
+Route::get('/', function () {return view('landing');});
 Route::get('/activate/{email}/{activationCode}', 'ActivationController@activate');
 
 Route::group(['middleware' => 'visitors'], function(){
@@ -23,6 +24,8 @@ Route::group(['middleware' => 'visitors'], function(){
     Route::post('/login', 'LoginController@postLogin');
     Route::get('/forgot-password', 'ForgetPasswordController@forgotPassword');
     Route::post('/forgot-password', 'ForgetPasswordController@postForgotPassword');
+    Route::get('/reset/{email}/{resetCode}', 'ForgetPasswordController@resetPassword');
+    Route::post('/reset/{email}/{resetCode}', 'ForgetPasswordController@postResetPassword');
 });
 
 Route::group(['middleware' => 'vendor'], function(){

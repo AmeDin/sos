@@ -23,7 +23,6 @@ class StallsController extends Controller
     public function index()
     {
         $stalls = Stall::where('user_id', Sentinel::getUser()->id)->get();
-
         return view('vendors.landing')
                     ->withStalls($stalls)
                     ->with('count', 0);

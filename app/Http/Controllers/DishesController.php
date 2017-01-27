@@ -33,6 +33,7 @@ class DishesController extends Controller
 
     public function store(Request $request)
     {
+
         $dish = new Dish();
         $dish->name = $request->name;
         $dish->stall_id = $request->stall;
@@ -63,8 +64,14 @@ class DishesController extends Controller
         };
         array_shift($ingredients);
         array_shift($ingredients);
+        array_shift($ingredients);
         array_pop($ingredients);
+        foreach ($ingredients as $ing){
+            array_push($ingredients, $ing+1);
+            array_shift($ingredients);
+        }
         $dish->ingredients()->attach($ingredients);
+
 
         Session::flash('success', 'Dish is successfully added');
         return redirect()->route('dishes.show', $dish->id);
@@ -133,17 +140,68 @@ class DishesController extends Controller
 
     public function edit($id)
     {
-        //
+        $dish = Dish::find($id);
+        $ingredients = Ingredient::all()->pluck('name')->toArray();
+        return view('dishes.edit')->with('dish',$dish)
+            ->with('ingredients',$ingredients);
     }
 
     public function update(Request $request, $id)
     {
-        //
+
+        $this->validate($request, array(
+            'name' => 'required|max:255'
+        ));
+        $dish = Dish::find($id);
+
+        $dish->name = $request->input('name');
+
+        if($request->hasFile('image'))
+        {
+            $img = $request->file('image');
+            $filename = time() . '.' . $img->getClientOriginalName();
+            $location = public_path('images/' . $filename);
+            Image::make($img)->resize(800, 600)->save($location);
+
+            $image = new \App\Image();
+            $image->url = $filename;
+            $image->save();
+
+            $dish->image_id = $image->id;
+
+        }
+
+        $dish->save();
+        $dish->ingredients()->detach();
+        $ingredients = array();
+        $req = $request->all();
+        foreach ($req as $r) {
+            array_push($ingredients, $r);
+        };
+        array_shift($ingredients);
+        array_shift($ingredients);
+        array_shift($ingredients);
+        if($request->hasFile('image'))
+        {
+            array_pop($ingredients);
+        }
+        foreach ($ingredients as $ing){
+            array_push($ingredients, $ing+1);
+            array_shift($ingredients);
+        }
+        $dish->ingredients()->attach($ingredients);
+        Session::flash('success', 'Dish ' . $dish->name . 'is successfully updated');
+        return redirect()->route('dishes.show', $dish->id);
     }
 
     public function destroy($id)
     {
-        //
+        $dish = Dish::find($id);
+        $name = $dish->name;
+        $id = $dish->stall_id;
+        $dish -> delete();
+        Session::flash('success', 'Dish ' . $name . ' is successfully deleted');
+        return redirect()->route('stalls.show', $id);
     }
 
 }

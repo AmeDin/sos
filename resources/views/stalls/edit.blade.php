@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.ame-master')
 
 @section('content')
     <div class="row">
@@ -22,7 +22,7 @@
                             <input type="file" name="image" class="form-control">
                         </div>
                     </div>
-                    <div class="img-responsive">Current image<br/><img src="{{asset('images/' . $img[0]['url'])}} " height="100" width="100"/></div>
+                    <div class="img-responsive">Current image<br/><img src="{{asset('images/' . $stall->image->url)}} " height="100" width="100"/></div>
 
 
                     <div id="success"> </div>

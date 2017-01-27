@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.ame-master')
 
 @section('content')
     <style>

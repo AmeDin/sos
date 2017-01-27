@@ -1,0 +1,54 @@
+
+.force-absolute-left{
+    position: absolute;
+    left: 10%;
+}
+
+.add-top-spacing{
+    margin-top: 10%;
+}
+
+body{
+    -webkit-background-size:cover;-moz-background-size:cover;background-size:cover;-o-background-size:cover;background-position:center;background-image:url(../images/header.jpg);
+}
+
+.add-bg, .navbar-nav>li>.dropdown-menu, .dropdown-submenu>.dropdown-menu{
+    background-color: #2e3436;
+}
+
+.navbar-default .navbar-nav .open .dropdown-menu>li>a {
+    color: white;
+}
+
+.navbar-default .navbar-nav .open .dropdown-menu>li>a:hover {
+    color: #F05F40;
+    background-color: transparent;
+}
+
+.navbar-default .nav>li>a:hover, .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover{
+    background-color: #000011;
+    color: #F05F40;
+}
+
+.navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle{
+    color: #F05F40;
+
+}
+
+.panel-primary>.panel-heading {
+    background-color: #F05F40;
+}
+
+
+.text-white {
+    color: #FFFFFF;
+}
+
+.text-orange {
+    color: #F05F40;
+}
+
+.add-hover{
+    cursor: pointer;
+    position: absolute;
+}
