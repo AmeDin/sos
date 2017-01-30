@@ -5,7 +5,7 @@
         <div class="col-md-12 col-xs-12">
             <div class="panel panel-default bg-grey-white">
                 <div class="panel-heading text-center">
-                    <h2>My Stalls <span>
+                    <h3>My Stalls<h3>
 
                 </div>
                 <div class="rows">

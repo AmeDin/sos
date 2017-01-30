@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">
+                    <div class="panel-heading ame-title">
                         Create Dish
                         <a href="{{ route('stalls.show', $stall_id) }}">
                             <span class="glyphicon glyphicon-remove pull-right"></span>

@@ -17,6 +17,4 @@ class Dish extends Model
     public function image(){
         return $this->belongsTo('App\Image');
     }
-
-
 }

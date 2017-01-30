@@ -17,4 +17,12 @@ class Ingredient extends Model
     public function nutrition(){
         return $this->hasOne('App\Nutrition');
     }
+
+    public function category(){
+        return $this->belongsTo('App\Category');
+    }
+
+    public function fixed_orders(){
+        return $this->belongsToMany('App\FixedOrder');
+    }
 }

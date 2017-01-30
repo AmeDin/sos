@@ -15,7 +15,8 @@ Route::get('/', function () {return view('landing');});
 Route::get('/cstalls', 'CustomerController@index')->name('customers.index');
 Route::get('/cstalls/{id}', 'CustomerController@stallHome')->name('customers.stall');
 Route::get('/cstallmain/{id}', 'CustomerController@stallMains')->name('customers.mains');
-Route::resource('/fixedOrder', 'FixedOrderController');
+Route::get('/fixedOrders/create/{id}', 'FixedOrderController@create')->name('fixedOrders.create');
+Route::post('/fixedOrders', 'FixedOrderController@store')->name('fixedOrders.store');
 
 Route::group(['middleware' => 'visitors'], function(){
     Route::get('/register', 'RegistrationController@register');

@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <div class="panel panel-default">
-                <div class="panel-heading">
+                <div class="panel-heading ame-title">
                     Create Stall
                     <a href="{{ route('stalls.index') }}">
                         <span class="glyphicon glyphicon-remove pull-right"></span>

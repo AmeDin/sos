@@ -14,7 +14,7 @@
                         @if($dishes->count() > 0)
                             @foreach($dishes as $indexKey => $dish)
                                 <div class="col-md-4 col-xs-6">
-                                    <a href="{{ route('fixedOrder.index', $dish->id) }}">
+                                    <a href="{{ route('fixedOrders.create', $dish->id) }}">
                                     <div class="ccard customer-card re-rotate">
                                         <div class="cimage text-center">
                                             <img src="{{asset('images/' . $dish->image->url )}} " height="100%" width="180" class="add-top-spacing">

@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col-md-3 col-xs-8 col-md-offset-0 col-xs-offset-2 ">
                 <div class="panel panel-default">
-                    <div class="panel-heading text-center">
+                    <div class="panel-body text-center">
                         <div class="col-md-12">
                             {!! Form::open(['route' => ['stalls.destroy', $stall->id,], 'method' => 'DELETE']) !!}
                             {!! Form::submit('Delete', ['class' => 'btn btn-danger delete-btn']) !!}
@@ -27,7 +27,7 @@
                 <div class="col-md-9 col-xs-12">
                     <div class="panel panel-default">
                         <div class="panel-heading text-center">
-                            <h2><span><button class="btn-danger pull-left point-seven" onclick="location.href='{{ route('stalls.index') }}'"> Back </button></span>
+                            <h3><span><button class="btn-danger pull-left point-seven" onclick="location.href='{{ route('stalls.index') }}'"> Back </button></span>
                             Dishes<span>
                         </div>
                         <div class="rows">

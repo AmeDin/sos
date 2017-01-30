@@ -2,7 +2,7 @@ body{
     -webkit-background-size:cover;-moz-background-size:cover;background-size:cover;-o-background-size:cover;background-position:center;background-image:url(../images/header.jpg);
 }
 
-h3 {
+h3, .ame-title, .panel-default>.panel-heading {
     text-align: center;
     text-shadow: 0px 0px 10px #eee;
     color: #eee;
@@ -161,7 +161,7 @@ p {
 
 }
 
-.panel-primary>.panel-heading {
+.panel-primary>.panel-heading, .panel-default>.panel-heading {
     background-color: #F05F40;
 }
 
@@ -241,6 +241,14 @@ p {
 
 .re-rotate{
     transform: rotateX(20deg);
+}
+
+.small {
+    width: 20%;
+}
+
+.medium {
+    width: 50%;
 }
 
 .override-carousel-control {
