@@ -8,7 +8,11 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading text-center">
-                        <h2>{{ $dish->name }}</h2>
+                        <h2>
+                            <span><button class="btn-danger pull-left point-seven" onclick="location.href='{{ route('stalls.show', $dish->stall_id) }}'"> Back </button></span>
+                            {{ $dish->name }}
+                            <span><button class="btn-success pull-right point-seven" onclick="location.href='{{ route('dishes.edit', $dish->id) }}'">Edit</button></span>
+                        </h2>
                     </div>
 
                     <div class="panel-body">
@@ -42,8 +46,8 @@
                         @endforeach
                         </tbody>
                     </table>
-                        <button class="btn-danger pull-left" onclick="location.href='{{ route('stalls.show', $dish->stall_id) }}'"> Back </button>
-                        <button class="btn-success pull-right" onclick="location.href='{{ route('dishes.edit', $dish->id) }}'">Edit</button>
+
+
                         {!! Form::open(array('route' => ['dishes.destroy', $dish->id,], 'class'=>'pull-right','method' => 'DELETE')) !!}
                         {!! Form::submit('Delete', array('class'=>'btn-danger')) !!}
                         {!! Form::close() !!}

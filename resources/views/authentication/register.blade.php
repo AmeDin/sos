@@ -1,7 +1,7 @@
 @extends('layouts.ame-master')
 
 @section('content')
-    <div class="row">
+    <div class="row add-top-spacing">
         <div class="col-md-6 col-md-offset-3">
             <div class="panel panel-primary">
                 <div class="panel-heading">

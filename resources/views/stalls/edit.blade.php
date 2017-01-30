@@ -13,7 +13,7 @@
                     <div class="form-group">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                            {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Stall name']) !!}
+                            {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Stall name', ]) !!}
                         </div>
                     </div>
                     <div class="form-group">
@@ -22,8 +22,9 @@
                             <input type="file" name="image" class="form-control">
                         </div>
                     </div>
-                    <div class="img-responsive">Current image<br/><img src="{{asset('images/' . $stall->image->url)}} " height="100" width="100"/></div>
-
+                    <div class="col-md-12 col-xs-12">
+                        <div class="img-responsive text-center">Current image<br/><img src="{{asset('images/' . $stall->image->url)}} " height="100" width="100"/></div>
+                    </div>
 
                     <div id="success"> </div>
                     <div class="row">

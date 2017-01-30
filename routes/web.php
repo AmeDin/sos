@@ -11,10 +11,11 @@
 |
 */
 
-
-//Route::get('/', function () {return view('welcome');});
 Route::get('/', function () {return view('landing');});
-Route::get('/activate/{email}/{activationCode}', 'ActivationController@activate');
+Route::get('/cstalls', 'CustomerController@index')->name('customers.index');
+Route::get('/cstalls/{id}', 'CustomerController@stallHome')->name('customers.stall');
+Route::get('/cstallmain/{id}', 'CustomerController@stallMains')->name('customers.mains');
+Route::resource('/fixedOrder', 'FixedOrderController');
 
 Route::group(['middleware' => 'visitors'], function(){
     Route::get('/register', 'RegistrationController@register');
@@ -26,6 +27,7 @@ Route::group(['middleware' => 'visitors'], function(){
     Route::post('/forgot-password', 'ForgetPasswordController@postForgotPassword');
     Route::get('/reset/{email}/{resetCode}', 'ForgetPasswordController@resetPassword');
     Route::post('/reset/{email}/{resetCode}', 'ForgetPasswordController@postResetPassword');
+    Route::get('/activate/{email}/{activationCode}', 'ActivationController@activate');
 });
 
 Route::group(['middleware' => 'vendor'], function(){
@@ -43,3 +45,4 @@ Route::group(['middleware' => 'admin' || 'vendor'], function(){
     Route::post('/logout', 'LoginController@logout');
 
 });
+

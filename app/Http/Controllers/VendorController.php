@@ -8,6 +8,6 @@ class VendorController extends Controller
 {
     public function landing()
     {
-        return view('vendors.landing');
+        return view('stalls.index');
     }
 }

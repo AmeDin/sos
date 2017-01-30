@@ -14,8 +14,11 @@
                     <div class="form-group">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
-                            {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Dish name']) !!}
+                            {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Dish name', 'required']) !!}
                         </div>
+                    </div>
+                    <div class="form-group col-md-12 col-xs-12">
+                        <button type = "button" onclick="addrow()" class="btn btn-primary pull-left">Add ingredient</button>
                     </div>
                     @if(! empty($dish))
                         <script>
@@ -37,22 +40,26 @@
 
                     <div id="new_ing"> </div>
 
-                    <div class="form-group">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa fa-camera-retro"></i></span>
-                            <input type="file" name="image" class="form-control">
+                    <div class="form-group col-md-12 col-xs-12">
+                         <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa fa-camera-retro"></i></span>
+                                <input type="file" name="image" class="form-control">
+                            </div>
                         </div>
                     </div>
-                    <div class="img-responsive">Current image<br/><img src="{{asset('images/' . $dish->image->url)}} " height="100" width="100"/></div>
 
-                    <button type = "button" onclick="addrow()" class="btn btn-primary pull-left">Add ingredient</button>
-                    <div id="success" class="col-sm-1 col-sm-offset-1"> </div>
+                    <div class="form-group col-md-12 col-xs-12 text-center">
+                        <div class="img-responsive">Current image<br/><img src="{{asset('images/' . $dish->image->url)}} " height="100" width="100"/></div>
+                    </div>
+
+                    <div id="success" > </div>
 
                     <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-md-6 col-sm-6">
                             {!! Html::linkRoute('dishes.show', 'Cancel', array($dish->id), array('class' => 'btn btn-danger btn-block')) !!}
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-md-6 col-sm-6">
                             {{ Form::submit('Save updates', ['class' => 'btn btn-success btn-block']) }}
                         </div>
                     </div>

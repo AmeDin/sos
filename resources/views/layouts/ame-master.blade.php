@@ -36,7 +36,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.css" rel="stylesheet">
 
     <!-- Theme CSS -->
-    <link href="{{ asset('/css/creative.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('/css/nav.css') }}" rel="stylesheet">
     <link href="{{ asset('/css/submenu.css') }}" rel="stylesheet">
     <link href="{{ asset('/css/custom.css') }}" rel="stylesheet">
 
@@ -50,9 +50,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
     <script src="{{ asset('/js/scrollreveal.js') }}"></script>
+    <script src="{{ asset('/js/laravel.js') }}"></script>
 
-    <!-- Theme JavaScript -->
-    <script src="{{ asset('/js/creative.min.js') }}"></script>
 
     <![endif]-->
 

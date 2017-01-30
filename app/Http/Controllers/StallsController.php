@@ -15,35 +15,18 @@ use App\Dish;
 
 class StallsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $stalls = Stall::where('user_id', Sentinel::getUser()->id)->get();
         return view('vendors.landing')
-                    ->withStalls($stalls)
-                    ->with('count', 0);
+                    ->withStalls($stalls);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('stalls.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $stall = new Stall;
@@ -71,12 +54,6 @@ class StallsController extends Controller
         return redirect()->route('stalls.show', $stall->id);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $stall = Stall::find($id);
@@ -86,25 +63,12 @@ class StallsController extends Controller
                 ->with('dishes', $dishes);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $stall = Stall::find($id);
         return view('stalls.edit')->with('stall',$stall);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $this->validate($request, array(
@@ -135,17 +99,18 @@ class StallsController extends Controller
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $stall = Stall::find($id);
         $stall -> delete();
         Session::flash('success', 'Stall is successfully deleted');
-        return redirect()->route('vendorhome');
+        return redirect()->route('stalls.index');
+    }
+
+    public function customerIndex()
+    {
+        $stalls = Stall::all();
+        return view('customers.stalls')
+            ->withStalls($stalls);
     }
 }
