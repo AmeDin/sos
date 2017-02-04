@@ -69,11 +69,17 @@ $autoIncrement = autoIncrement();
 
 $factory->define(App\RoleUser::class, function (Faker\Generator $faker) use ($autoIncrement) {
     $autoIncrement->next();
-    return [
-        'user_id' => $autoIncrement->current(),
-        'role_id' => 2
-    ];
-
+    if ($autoIncrement->current() == 1){
+        return [
+            'user_id' => $autoIncrement->current(),
+            'role_id' => 1
+        ];
+    }else{
+        return [
+            'user_id' => $autoIncrement->current(),
+            'role_id' => 2
+        ];
+    }
 
 });
 
@@ -95,7 +101,7 @@ $factory->define(App\Ingredient::class, function (Faker\Generator $faker) use ($
     $autoIncrement->next();
 
     // 16 ingredients atm
-    $ingredients = [['White Rice', 0.50, 1], ['Lemak Rice', 1.00, 1], ['Seasoned Rice', 1.00, 1],
+    $ingredients = [['White Rice', 0.25, 1], ['Lemak Rice', 0.50, 1], ['Seasoned Rice', 0.50, 1],
                     ['Whole Chicken', 6.50, 2], ['1/2 Chicken', 4.00, 2], ['Small Chicken', 1.50, 2],
                     ['Carrot', 0.20, 3], ['Lettuce', 0.20, 3], ['Onion', 0.2, 3], ['Cucumber', 0.2, 3],
                     ['Trout', 3.50, 4], ['Salmon', 4.00, 4], ['Tilapia', 1.50, 4], ['Prawn', 1.50, 4],

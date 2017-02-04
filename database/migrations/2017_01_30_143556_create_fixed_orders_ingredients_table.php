@@ -13,7 +13,7 @@ class CreateFixedOrdersIngredientsTable extends Migration
      */
     public function up()
     {
-        Schema::create('fixed_orders_ingredients', function (Blueprint $table) {
+        Schema::create('fixed_order_ingredient', function (Blueprint $table) {
             $table->integer('fixed_order_id');
             $table->integer('ingredient_id');
             $table->integer('quantity');
@@ -30,6 +30,6 @@ class CreateFixedOrdersIngredientsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('fixed_orders_ingredients');
+        Schema::drop('fixed_order_ingredient');
     }
 }

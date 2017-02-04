@@ -12,10 +12,9 @@ h3, .ame-title, .panel-default>.panel-heading {
 
 p {
     font-size: 14px;
-    color: #fff;
+    color: #000;
     padding: 0px 20px 20px 20px;
     line-height: 150%;
-    text-align: center;
     letter-spacing: 1px;
 }
 
@@ -181,6 +180,10 @@ p {
     text-decoration: underline;
 }
 
+.table>thead:first-child>tr:first-child>th {
+    text-align: center;
+}
+
 .text-white {
     color: #FFFFFF;
 }
@@ -320,11 +323,17 @@ p {
     .add-top-spacing{
         margin-top: 10%;
     }
+    .add-minor-top-spacing{
+        margin-top: 5%;
+    }
 }
 
 @media (min-width: 768px) {
     .add-top-spacing{
         margin-top: 5%;
+    }
+    .add-minor-top-spacing{
+        margin-top: 2%;
     }
 }
 

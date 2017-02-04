@@ -31,7 +31,7 @@
                         <span>Cost: ${{  number_format($dish->ingredients->sum('price'), 2) }}</span>
 
 
-                    <h4>Nutrition Info</h4>
+                    <h4 class="text-center">Nutrition Info</h4>
                     <table class="table">
                         <thead>
                             <th>Nutrition</th>
@@ -39,7 +39,7 @@
                         </thead>
                         <tbody>
                         @foreach($nutrition['nutrition'] as $n)
-                            <tr>
+                            <tr class="text-center">
                                 <td>{{$n['name']}}</td>
                                 <td>{{$n['value']}}</td>
                             </tr>

@@ -1,11 +1,6 @@
 @extends('layouts.ame-master')
 
 @section('content')
-    <style>
-        .titleAbsolute{
-            position: absolute;
-        }
-    </style>
     <div class="container">
         <div class="row">
             <div class="col-md-3 col-xs-8 col-md-offset-0 col-xs-offset-2 ">

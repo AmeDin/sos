@@ -17,6 +17,7 @@ Route::get('/cstalls/{id}', 'CustomerController@stallHome')->name('customers.sta
 Route::get('/cstallmain/{id}', 'CustomerController@stallMains')->name('customers.mains');
 Route::get('/fixedOrders/create/{id}', 'FixedOrderController@create')->name('fixedOrders.create');
 Route::post('/fixedOrders', 'FixedOrderController@store')->name('fixedOrders.store');
+Route::get('/fixedOrders/{id}', 'FixedOrderController@show')->name('fixedOrders.show');
 
 Route::group(['middleware' => 'visitors'], function(){
     Route::get('/register', 'RegistrationController@register');
@@ -47,3 +48,7 @@ Route::group(['middleware' => 'admin' || 'vendor'], function(){
 
 });
 
+Route::get('/ajaxcall/{ing_id?}',function($ing_id){
+    $ing = \App\Ingredient::find($ing_id);
+    return Response::json($ing->nutrition);
+});
