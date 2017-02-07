@@ -18,6 +18,11 @@ Route::get('/cstallmain/{id}', 'CustomerController@stallMains')->name('customers
 Route::get('/fixedOrders/create/{id}', 'FixedOrderController@create')->name('fixedOrders.create');
 Route::post('/fixedOrders', 'FixedOrderController@store')->name('fixedOrders.store');
 Route::get('/fixedOrders/{id}', 'FixedOrderController@show')->name('fixedOrders.show');
+Route::get('/cstallpromotion/{id}', 'CustomerController@stallPromotion')->name('customers.promotion');
+
+Route::get('/cstallcustomize/{id}', 'CustomerController@stallCustomize')->name('customers.customize');
+Route::post('/customizeOrders', 'CustomizeOrderController@create')->name('customizeOrders.create');
+Route::post('/customizeOrders/hell', 'CustomizeOrderController@store')->name('customizeOrders.store');
 
 Route::group(['middleware' => 'visitors'], function(){
     Route::get('/register', 'RegistrationController@register');
@@ -35,12 +40,13 @@ Route::group(['middleware' => 'visitors'], function(){
 Route::group(['middleware' => 'vendor'], function(){
     Route::get('/landing', 'VendorController@landing')->name('vendorhome');
     Route::resource('stalls', 'StallsController');
+    Route::resource('promotions', 'PromotionsController');
     Route::resource('dishes', 'DishesController');
+
 });
 
 Route::group(['middleware' => 'admin'], function(){
-    Route::get('/earnings', 'AdminController@earnings')->middleware('admin');
-
+    Route::get('/vendors', 'AdminController@index')->name('admins.index')->middleware('admin');
 });
 
 Route::group(['middleware' => 'admin' || 'vendor'], function(){

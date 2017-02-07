@@ -47,9 +47,8 @@ $factory->define(Cartalyst\Sentinel\Activations\EloquentActivation::class, funct
 
 $autoIncrement = autoIncrement();
 
-$factory->define(Cartalyst\Sentinel\Roles\EloquentRole::class, function (Faker\Generator $faker) use ($autoIncrement) {
+$factory->define(Cartalyst\Sentinel\Roles\EloquentRole::class, function () use ($autoIncrement) {
     $autoIncrement->next();
-    $name = "";
     if ($autoIncrement->current() == 1){
         $name = "admin";
     }else{
@@ -67,7 +66,7 @@ $factory->define(Cartalyst\Sentinel\Roles\EloquentRole::class, function (Faker\G
 
 $autoIncrement = autoIncrement();
 
-$factory->define(App\RoleUser::class, function (Faker\Generator $faker) use ($autoIncrement) {
+$factory->define(App\RoleUser::class, function () use ($autoIncrement) {
     $autoIncrement->next();
     if ($autoIncrement->current() == 1){
         return [
@@ -85,7 +84,7 @@ $factory->define(App\RoleUser::class, function (Faker\Generator $faker) use ($au
 
 $autoIncrement = autoIncrement();
 
-$factory->define(App\Category::class, function (Faker\Generator $faker) use ($autoIncrement) {
+$factory->define(App\Category::class, function () use ($autoIncrement) {
     $categories = ['Staples', 'Meat', 'Vegetable', 'Seafood', 'Nut', 'Sauce', 'Drinks', 'Desert'];
     $autoIncrement->next();
     return [
@@ -97,36 +96,16 @@ $factory->define(App\Category::class, function (Faker\Generator $faker) use ($au
 
 $autoIncrement = autoIncrement();
 
-$factory->define(App\Ingredient::class, function (Faker\Generator $faker) use ($autoIncrement) {
+$factory->define(App\Ingredient::class, function () use ($autoIncrement) {
     $autoIncrement->next();
 
-    // 16 ingredients atm
+    // 19 ingredients atm
     $ingredients = [['White Rice', 0.25, 1], ['Lemak Rice', 0.50, 1], ['Seasoned Rice', 0.50, 1],
                     ['Whole Chicken', 6.50, 2], ['1/2 Chicken', 4.00, 2], ['Small Chicken', 1.50, 2],
                     ['Carrot', 0.20, 3], ['Lettuce', 0.20, 3], ['Onion', 0.2, 3], ['Cucumber', 0.2, 3],
                     ['Trout', 3.50, 4], ['Salmon', 4.00, 4], ['Tilapia', 1.50, 4], ['Prawn', 1.50, 4],
-                    ['Sambal', 0.00, 6], ['Mayonnaise', 0.00, 6]]
-    ;
-    return [
-        'name' => $ingredients[$autoIncrement->current()-1][0],
-        'price' => $ingredients[$autoIncrement->current()-1][1],
-        'category_id' => $ingredients[$autoIncrement->current()-1][2]
-    ];
-
-
-});
-
-$autoIncrement = autoIncrement();
-
-$factory->define(App\Ingredient::class, function (Faker\Generator $faker) use ($autoIncrement) {
-    $autoIncrement->next();
-
-    // 16 ingredients atm
-    $ingredients = [['White Rice', 0.50, 1], ['Lemak Rice', 1.00, 1], ['Seasoned Rice', 1.00, 1],
-        ['Whole Chicken', 6.50, 2], ['1/2 Chicken', 4.00, 2], ['Small Chicken', 1.50, 2],
-        ['Carrot', 0.20, 3], ['Lettuce', 0.20, 3], ['Onion', 0.2, 3], ['Cucumber', 0.2, 3],
-        ['Trout', 3.50, 4], ['Salmon', 4.00, 4], ['Tilapia', 1.50, 4], ['Prawn', 1.50, 4],
-        ['Sambal', 0.00, 6], ['Mayonnaise', 0.00, 6]]
+                    ['Fish cake', 0.50, 4], ['Peanut', 0.10, 5], ['Sambal', 0.00, 6], ['Mayonnaise', 0.00, 6],
+                    ['Hot dog', 0.50, 2]]
     ;
     return [
         'name' => $ingredients[$autoIncrement->current()-1][0],
@@ -143,13 +122,18 @@ $factory->define(App\Nutrition::class, function (Faker\Generator $faker) use ($a
     $autoIncrement->next();
 
     // 16 ingredients atm
-    $nutritions = [[100, 200, 5, 0, 10, 3, 10], [100, 200, 5, 0, 10, 3, 10],  [100, 200, 5, 0, 10, 3, 10],
-        [100, 200, 5, 0, 10, 3, 10], [100, 200, 5, 0, 10, 3, 10], [100, 200, 5, 0, 10, 3, 10],
-        [100, 200, 5, 0, 10, 3, 10], [100, 200, 5, 0, 10, 3, 10], [100, 200, 5, 0, 10, 3, 10],
-        [100, 200, 5, 0, 10, 3, 10], [100, 200, 5, 0, 10, 3, 10], [100, 200, 5, 0, 10, 3, 10],
-        [100, 200, 5, 0, 10, 3, 10], [100, 200, 5, 0, 10, 3, 10], [100, 200, 5, 0, 10, 3, 10],
-        [100, 200, 5, 0, 10, 3, 10]]
+    $nutritions = array();
     ;
+    for($i=0; $i< 19; $i++){
+        array_push($nutritions, [$faker->numberBetween($min = 100, $max = 900),
+                                 $faker->numberBetween($min = 100, $max = 900),
+                                 $faker->numberBetween($min = 0, $max = 9),
+                                 $faker->numberBetween($min = 0, $max = 3),
+                                 $faker->numberBetween($min = 5, $max = 20),
+                                 $faker->numberBetween($min = 0, $max = 9),
+                                 $faker->numberBetween($min = 0, $max = 9),
+                                 ]);
+    }
     return [
         'calories' => $nutritions[$autoIncrement->current()-1][0],
         'carbohydrate' => $nutritions[$autoIncrement->current()-1][1],
@@ -161,6 +145,120 @@ $factory->define(App\Nutrition::class, function (Faker\Generator $faker) use ($a
         'ingredient_id' => $autoIncrement->current()
     ];
 
+
+});
+
+$autoIncrement = autoIncrement();
+
+$factory->define(App\Image::class, function (Faker\Generator $faker) use ($autoIncrement) {
+    $autoIncrement->next();
+
+    $url = ["muslim.png"];
+    return [
+        'url' => $url[$autoIncrement->current()-1]
+    ];
+
+
+});
+
+$factory->define(App\Stall::class, function ()  {
+
+    return [
+        'name' => 'Muslim',
+        'user_id' => 2,
+        'image_id' => 1
+    ];
+
+
+});
+
+$autoIncrement = autoIncrement();
+
+$factory->define(App\Image::class, function () use ($autoIncrement) {
+    $autoIncrement->next();
+
+    $url = ["muslim.png"];
+    return [
+        'url' => $url[$autoIncrement->current()-1]
+    ];
+
+
+});
+
+$autoIncrement = autoIncrement();
+
+$factory->define(App\Dish::class, function () use ($autoIncrement) {
+    $autoIncrement->next();
+    $dishes = [['Nasi Lemak', 1, 2], ['Nasi Ayam', 1, 3]];
+
+    return [
+        'name' => $dishes[$autoIncrement->current()-1][0],
+        'stall_id' => $dishes[$autoIncrement->current()-1][1],
+        'image_id' => $dishes[$autoIncrement->current()-1][2]
+    ];
+
+
+});
+
+
+$factory->define(App\Promotion::class, function (Faker\Generator $faker) {
+
+    return [
+        'name' => "Discount after 3pm",
+        'description' => "Price cut for Nasi Lemak by $2 after 3pm!",
+        'price' =>  2.00 ,
+        'stall_id' => '1',
+        'image_id' => 4,
+        'start_date' => $faker->date($format = 'Y-m-d', $max = 'now'),
+        'end_date' => $faker->date($format = 'Y-m-d', $min = 'now', $max = 'now')
+
+    ];
+
+
+});
+
+$autoIncrement = autoIncrement();
+
+$factory->define(App\Image::class, function () use ($autoIncrement) {
+    $autoIncrement->next();
+
+    $url = ["muslim.png", "nasi-lemak.jpg", "nasi-ayam.jpg", "discount.png"];
+    return [
+        'url' => $url[$autoIncrement->current()-1]
+    ];
+
+
+});
+
+$autoIncrement = autoIncrement();
+$autoIncrementX = autoIncrement();
+$autoIncrementY = autoIncrement();
+
+$factory->define(App\DishIngredient::class, function () use ($autoIncrement, $autoIncrementX, $autoIncrementY)  {
+
+    $recipes = [[2,6,10,16,17],[3,5,8]];
+
+    if($autoIncrement->current()==5){
+        $autoIncrementX->next();
+        $autoIncrementY->next();
+    }else if($autoIncrement->current()>5){
+        $autoIncrementY->next();
+    }
+    $autoIncrement->next();
+
+    if($autoIncrementX->current()==0){
+        return [
+            'dish_id' => 1,
+            'ingredient_id' => $recipes[0][$autoIncrement->current()-1]
+        ];
+    }else{
+
+        $autoIncrement->next();
+        return [
+            'dish_id' => 2,
+            'ingredient_id' => $recipes[1][$autoIncrementY->current()-1]
+        ];
+    }
 
 });
 

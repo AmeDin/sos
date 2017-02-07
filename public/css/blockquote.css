@@ -1,0 +1,157 @@
+blockquote{
+    border-left:none;
+}
+
+.quote-badge{
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.quote-box{
+
+    overflow: hidden;
+    margin-top: 40px;
+    padding-top: 10px;
+    border-radius: 50px;
+    background-color: #ce8483;
+    color:white;
+    width: 100%;
+    box-shadow: 2px 2px 2px 2px #E0E0E0;
+    /*#d9534f;*/
+
+}
+
+.quotation-mark{
+    font-weight: bold;
+    border-bottom: 1px solid white;
+    font-size:30px;
+    color:white;
+    font-family: "Times New Roman", Georgia, Serif;
+    text-align: left;
+    margin-top: 5px;
+
+}
+.quotation-markheader{
+    font-weight: bold;
+    font-size:30px;
+    color:white;
+    font-family: "Buxton Sketch";
+    text-align: left;
+    margin-top: 5px;
+
+}
+
+.quote-img{
+    margin-top: 5px;
+    height: 200px;
+    width: 200px;
+    text-align: center;
+    border-bottom: 1px solid white;
+}
+
+.quote-text{
+    margin-left: 30px;
+    margin-top: 10px;
+    font-size: 19px;
+}
+
+.quote-footer{
+
+    margin-top: 40px;
+    margin-left: -20px;
+    font-size: 30px;
+}
+
+.quote-date{
+    margin-top: 20px;
+    font-size: 15px;
+}
+
+
+.btnown {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    background: #c7254e;
+    color: #ffffff;
+}
+.btnown.outline {
+    background: none;
+    padding: 12px 22px;
+    border-radius: 20px;
+}
+
+.btnown.outline {
+    border: 2px solid #c7254e;
+    color: #d62728;
+}
+
+.btnown.outline:hover, .btnown.outline:focus, .btnown.outline:active, .btnown.outline.active, .open > .dropdown-toggle.btnown {
+    color: white;
+    border-color: white;
+}
+.btnown.outline:active, .btnown.outline.active {
+    border-color: #c7254e;
+    color: #c7254e;
+    box-shadow: none;
+}
+.btnown:focus, .btn:active:focus, .btn.active:focus {
+    outline: 0 none;
+}
+
+.btnown:hover, .btnown:focus, .btnown:active, .btnown.active, .open > .dropdown-toggle.btnown {
+    background: #d62728;
+}
+
+.btnown:active, .btnown.active {
+    background: #000000;
+    box-shadow: none;
+}
+
+
+
+
+.btnstall {
+    margin-top: 25px;
+    margin-bottom: 25px;
+    padding: 20px 20px;
+    width: 250px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: #f2dede;
+    color: #ffffff;
+}
+.btnstall.outline {
+    background: none;
+    padding: 12px 22px;
+    border-radius: 20px;
+}
+
+.btnstall.outline {
+    border: 2px solid #c7254e;
+    color: #000011;
+}
+
+.btnstall.outline:hover, .btnstall.outline:focus, .btnstall.outline:active, .btnstall.outline.active, .open > .dropdown-toggle.btnstall {
+    color: white;
+    border-color: white;
+}
+.btnstall.outline:active, .btnstall.outline.active {
+    border-color: #c7254e;
+    color: #000011;
+    box-shadow: #000011;
+}
+.btnstall:focus, .btn:active:focus, .btn.active:focus {
+    outline: 0 none;
+}
+
+.btnstall:hover, .btnstall:focus, .btnown:active, .btnstall.active, .open > .dropdown-toggle.btnstall {
+    background: #ff6666;
+}
+
+.btnstall:active, .btnstall.active {
+    background: #000000;
+    box-shadow: none;
+}

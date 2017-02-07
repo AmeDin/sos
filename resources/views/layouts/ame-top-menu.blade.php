@@ -24,14 +24,21 @@
                         </a>
 
                         <ul class="dropdown-menu multi-level dropdown-alignment-center" role="menu" >
+                            @if(!Sentinel::inRole('admin'))
                             <li class="dropdown-submenu">
-                                <a tabindex="-1" href="{{ route('stalls.index') }}"><i class="fa fa-caret-left force-absolute-left" aria-hidden="true" ></i>My Stall</a>
-                                <ul class="dropdown-menu  dropdown-alignment-center">
-                                    <li ><a tabindex="-1" href="{{ route('stalls.index') }}">View All</a></li>
-                                    <li class="divider"></li>
-                                    <li><a tabindex="-1"href="{{ route('stalls.create') }}">Create</a></li>
-                                </ul>
+
+                                    <a tabindex="-1" href="{{ route('stalls.index') }}"><i class="fa fa-caret-left force-absolute-left" aria-hidden="true" ></i>My Stall</a>
+                                    <ul class="dropdown-menu  dropdown-alignment-center">
+                                        <li ><a tabindex="-1" href="{{ route('stalls.index') }}">View All</a></li>
+                                        <li class="divider"></li>
+                                        <li><a tabindex="-1"href="{{ route('stalls.create') }}">Create</a></li>
+                                    </ul>
                             </li>
+                            @else
+                            <li><a href="{{ route('admins.index') }}"></i>Manage Vendors</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{{ route('admins.index') }}"></i>Manage Ingredients</a></li>
+                            @endif
                             <li class="divider"></li>
                             <li>
                                 <a href="{{ url('/logout') }}"
@@ -39,7 +46,6 @@
                                                      document.getElementById('logout-form').submit();">
                                     Logout
                                 </a>
-
                                 <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                                     {{ csrf_field() }}
                                 </form>

@@ -21,10 +21,10 @@
                     <div>
                 @else
                     <div class="col-md-6 text-center">
-                        <a href="/login" class="btn btn-primary btn-xl page-scroll sr-button">Login</a>
+                        <a href="/login" class="btn btn-primary btn-xl page-scroll sr-button add-top-spacing">Login</a>
                     </div>
                     <div class="col-md-6 text-center">
-                        <a href="/register" class="btn btn-primary btn-xl page-scroll sr-button">Register</a>
+                        <a href="/register" class="btn btn-primary btn-xl page-scroll sr-button add-top-spacing">Register</a>
                     </div>
                 @endif
             </div>

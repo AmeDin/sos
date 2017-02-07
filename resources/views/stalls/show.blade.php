@@ -15,6 +15,7 @@
                         </div>
                         <div class="panel-body text-center">
                             <img class="img-responsive" src="{{asset('images/' . $stall->image->url)}} " height="150" width="200"/>
+                            <h4><span><button class="btn-danger btn-block" onclick="location.href='{{ route('promotions.show',$stall->id) }}'"> Promotions </button></span></h4>
                         </div>
                     </div>
                 </div>
@@ -23,7 +24,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading text-center">
                             <h3><span><button class="btn-danger pull-left point-seven" onclick="location.href='{{ route('stalls.index') }}'"> Back </button></span>
-                            Dishes<span>
+                            Dishes</h3>
                         </div>
                         <div class="rows">
                             <div class="panel-body pad-top-five">
@@ -64,7 +65,6 @@
                                         @if($dishes->count() == $indexKey + 1)
                                             @include('partials._nodish')
                                         @endif
-                                        <div class="hidden">{{ $indexKey++ }}
                                     @endforeach
 
                                 @else
@@ -76,6 +76,6 @@
                 </div>
         </div>
     </div>
-
+    </div>
 
 @endsection

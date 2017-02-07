@@ -22,7 +22,7 @@ class LoginController extends Controller
             if(Sentinel::authenticate($request->all())){
                 $slug = Sentinel::getUser()->roles()->first()->slug;
                 if($slug == 'admin')
-                    return redirect('/earnings');
+                    return redirect('/vendors');
                 elseif($slug == 'svendor')
                     return redirect('/stalls');
             }else{

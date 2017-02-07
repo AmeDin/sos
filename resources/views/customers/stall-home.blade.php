@@ -7,16 +7,16 @@
                 <div class="panel-heading text-center">
                     <h2>{{ $name }}</h2>
                 </div>
-                <div class="panel panel-body text-center">
-                    <div class="col-md-2 col-md-offset-1 col-xs-4 customer-card">
-                        <h2>Customize</h2>
-                    </div>
-                    <div class="col-md-2 col-md-offset-2 col-xs-4 customer-card">
-                        <a href="{{ route('customers.mains', $id)}}"><h2>Mains</h2></a>
-                    </div>
-                    <div class="col-md-2 col-md-offset-2 col-xs-4 customer-card">
-                        <h2>Promotion</h2>
-                    </div>
+                <div class="row">
+                    <a style="color: #5e5e5e; text-align: center" href="{{ route('customers.mains', $id)}}">
+                        <div class="col-md-3 col-md-offset-1 col-xs-4 btnstall outline"><h2>Mains</h2></div></a>
+
+                    <a style="color: #5e5e5e; text-align: center" href="{{ route('customers.customize', $id)}}">
+                        <div class="col-md-3 col-md-offset-1 col-xs-4 btnstall outline"><h2>Customize</h2></div></a>
+
+                    <a style="color: #5e5e5e; text-align: center" href="{{ route('customers.promotion', $id)}}">
+                        <div class="col-md-3 col-md-offset-1 col-xs-4 btnstall outline"><h2>Promotion</h2></div></a>
+
                 </div>
             </div>
         </div>

@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Stall;
 use App\Dish;
+use App\Ingredient;
+use App\Promotion;
+use Carbon\Carbon;
 
 class CustomerController extends Controller
 {
@@ -29,5 +32,42 @@ class CustomerController extends Controller
         return view('customers.stall-mains')
             ->withStalls($stalls)
             ->withDishes($dishes);
+    }
+
+    public function stallPromotion($id)
+    {
+        $stalls = Stall::find($id);
+        $promotions = Promotion::where('stall_id', $id)->get();
+        $todaydate = Carbon::today()->format('Y-m-d');
+        return view('customers.stall-promotion')
+            ->withStalls($stalls)
+            ->with('promotions',$promotions)
+            ->with('todaydate',$todaydate);
+    }
+
+    public function stallCustomize($id)
+    {
+        $stalls = Stall::find($id);
+
+        $ingredientsStaple = Ingredient::where('stall_id', $id)->where('category_id', '1')->get();
+        $ingredientsMeat = Ingredient::where('stall_id', $id)->where('category_id', '2')->get();
+        $ingredientsVegetable = Ingredient::where('stall_id', $id)->where('category_id', '3')->get();
+        $ingredientsSeafood = Ingredient::where('stall_id', $id)->where('category_id', '4')->get();
+        $ingredientsNut = Ingredient::where('stall_id', $id)->where('category_id', '5')->get();
+        $ingredientsSauce = Ingredient::where('stall_id', $id)->where('category_id', '6')->get();
+        $ingredientsDrink = Ingredient::where('stall_id', $id)->where('category_id', '7')->get();
+
+
+        return view('customers.stall-customize')
+            ->withStalls($stalls)
+            ->with('staple', $ingredientsStaple)
+            ->with('meat', $ingredientsMeat)
+            ->with('vegetable', $ingredientsVegetable)
+            ->with('seafood', $ingredientsSeafood)
+            ->with('Nut', $ingredientsNut)
+            ->with('Sauce', $ingredientsSauce)
+            ->with('Drink', $ingredientsDrink);
+
+
     }
 }
