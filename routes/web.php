@@ -46,7 +46,9 @@ Route::group(['middleware' => 'vendor'], function(){
 });
 
 Route::group(['middleware' => 'admin'], function(){
-    Route::get('/vendors', 'AdminController@index')->name('admins.index')->middleware('admin');
+    Route::get('/vendors', 'AdminController@index')->name('admins.index') /*->middleware('admin')*/;
+    Route::get('/logs', 'LogsController@index')->name('logs.index');
+    Route::delete('/logs', 'LogsController@destroyAll')->name('logs.destroy');
 });
 
 Route::group(['middleware' => 'admin' || 'vendor'], function(){

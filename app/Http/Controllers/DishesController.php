@@ -12,6 +12,7 @@ use Session;
 use Auth;
 use Sentinel;
 use App\Stall;
+use App\Log;
 use Illuminate\Support\Facades\URL;
 
 class DishesController extends Controller
@@ -37,8 +38,6 @@ class DishesController extends Controller
         $dish = new Dish();
         $dish->name = $request->name;
         $dish->stall_id = $request->stall;
-
-
 
         if($request->hasFile('image'))
         {
@@ -72,6 +71,8 @@ class DishesController extends Controller
         }
         $dish->ingredients()->attach($ingredients);
 
+        $log = new Log;
+        $log->createLog("Dish","Create " . $dish->name . " dish", Sentinel::getUser()->id);
 
         Session::flash('success', 'Dish is successfully added');
         return redirect()->route('dishes.show', $dish->id);
@@ -191,6 +192,8 @@ class DishesController extends Controller
         }
         $dish->ingredients()->attach($ingredients);
         Session::flash('success', 'Dish ' . $dish->name . 'is successfully updated');
+        $log = new Log;
+        $log->createLog("Dish","Edit " . $dish->name . " dish", Sentinel::getUser()->id);
         return redirect()->route('dishes.show', $dish->id);
     }
 
@@ -201,6 +204,8 @@ class DishesController extends Controller
         $id = $dish->stall_id;
         $dish -> delete();
         Session::flash('success', 'Dish ' . $name . ' is successfully deleted');
+        $log = new Log;
+        $log->createLog("Dish","Delete " . $name . " dish", Sentinel::getUser()->id);
         return redirect()->route('stalls.show', $id);
     }
 

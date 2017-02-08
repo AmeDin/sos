@@ -25,15 +25,12 @@ class RegistrationController extends Controller
         try {
             $this->validate($request, EloquentUser::$register_validate);
             $user = Sentinel::register($request->all());
-
             $activation = Activation::create($user);
-
             $role = Sentinel::findRoleBySlug('svendor');
-
             $role->users()->attach($user);
-
             $this->sendEmail($user, $activation->code);
             Session::flash('success', 'Registration successful, please check your mail for he activation link.');
+            
             return redirect('/');
         }catch (QueryException $e){
             $err = $e->getMessage();

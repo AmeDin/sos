@@ -38,6 +38,8 @@
                             <li><a href="{{ route('admins.index') }}"></i>Manage Vendors</a></li>
                             <li class="divider"></li>
                             <li><a href="{{ route('admins.index') }}"></i>Manage Ingredients</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{{ route('logs.index') }}"></i>View Logs</a></li>
                             @endif
                             <li class="divider"></li>
                             <li>

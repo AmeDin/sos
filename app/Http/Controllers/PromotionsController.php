@@ -12,6 +12,7 @@ use Redirect;
 use Session;
 use Auth;
 use Sentinel;
+use App\Log;
 use Illuminate\Support\Facades\URL;
 
 class PromotionsController extends Controller
@@ -70,7 +71,8 @@ class PromotionsController extends Controller
         }
 
         $promotion->save();
-
+        $log = new Log;
+        $log->createLog("Promotion","Create " . $promotions->name . " promotion", Sentinel::getUser()->id);
         Session::flash('success', 'Promotion is successfully added');
         return redirect()->route('promotions.show', $promotion->stall_id);
     }
@@ -116,6 +118,8 @@ class PromotionsController extends Controller
 
         $promotions->save();
         Session::flash('success', 'Promotion for stall is successfully updated');
+        $log = new Log;
+        $log->createLog("Promotion","Edit " . $promotions->name . " promotion", Sentinel::getUser()->id);
         return redirect()->route('promotions.show', $promotions->id);
 
     }
@@ -124,6 +128,8 @@ class PromotionsController extends Controller
         $promotions = Promotion::find($id);
         $promotions -> delete();
         Session::flash('success', 'Promotion is successfully deleted');
+        $log = new Log;
+        $log->createLog("Promotion","Delete " . $promotions->name . " promotion", Sentinel::getUser()->id);
         return redirect()->route('promotions.show', $promotions->id);
     }
 }

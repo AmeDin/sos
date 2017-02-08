@@ -12,6 +12,7 @@ use Auth;
 use Sentinel;
 use Image;
 use App\Dish;
+use App\Log;
 
 class StallsController extends Controller
 {
@@ -19,7 +20,7 @@ class StallsController extends Controller
     {
         $stalls = Stall::where('user_id', Sentinel::getUser()->id)->get();
         return view('vendors.landing')
-                    ->withStalls($stalls);
+            ->withStalls($stalls);
     }
 
     public function create()
@@ -49,6 +50,9 @@ class StallsController extends Controller
         }
 
         $stall->save();
+
+        $log = new Log;
+        $log->createLog("Stall","Create " . $stall->name . " stall", Sentinel::getUser()->id);
 
         Session::flash('success', 'Stall is successfully created');
         return redirect()->route('stalls.show', $stall->id);
@@ -90,10 +94,13 @@ class StallsController extends Controller
             $image->save();
 
             $stall->image_id = $image->id;
-
         }
 
         $stall->save();
+
+        $log = new Log;
+        $log->createLog("Stall","Edit" . $stall->name . " stall", Sentinel::getUser()->id);
+
         Session::flash('success', 'Stall is successfully updated');
         return redirect()->route('stalls.show', $stall->id);
 
@@ -102,8 +109,12 @@ class StallsController extends Controller
     public function destroy($id)
     {
         $stall = Stall::find($id);
+        $name = $stall->name;
         $stall -> delete();
         Session::flash('success', 'Stall is successfully deleted');
+
+        $log = new Log;
+        $log->createLog("Stall","Delete " . $name . " stall", Sentinel::getUser()->id);
         return redirect()->route('stalls.index');
     }
 

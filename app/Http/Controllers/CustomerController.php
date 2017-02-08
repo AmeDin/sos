@@ -49,13 +49,13 @@ class CustomerController extends Controller
     {
         $stalls = Stall::find($id);
 
-        $ingredientsStaple = Ingredient::where('stall_id', $id)->where('category_id', '1')->get();
-        $ingredientsMeat = Ingredient::where('stall_id', $id)->where('category_id', '2')->get();
-        $ingredientsVegetable = Ingredient::where('stall_id', $id)->where('category_id', '3')->get();
-        $ingredientsSeafood = Ingredient::where('stall_id', $id)->where('category_id', '4')->get();
-        $ingredientsNut = Ingredient::where('stall_id', $id)->where('category_id', '5')->get();
-        $ingredientsSauce = Ingredient::where('stall_id', $id)->where('category_id', '6')->get();
-        $ingredientsDrink = Ingredient::where('stall_id', $id)->where('category_id', '7')->get();
+        $ingredientsStaple = Ingredient::where('category_id', '1')->get();
+        $ingredientsMeat = Ingredient::where('category_id', '2')->get();
+        $ingredientsVegetable = Ingredient::where('category_id', '3')->get();
+        $ingredientsSeafood = Ingredient::where('category_id', '4')->get();
+        $ingredientsNut = Ingredient::where('category_id', '5')->get();
+        $ingredientsSauce = Ingredient::where('category_id', '6')->get();
+        $ingredientsDrink = Ingredient::where('category_id', '7')->get();
 
 
         return view('customers.stall-customize')

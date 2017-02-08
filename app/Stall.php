@@ -14,6 +14,4 @@ class Stall extends Model
         return $this->belongsTo('App\Image');
     }
 
-    
-
 }

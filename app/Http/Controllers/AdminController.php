@@ -18,13 +18,5 @@ class AdminController extends Controller
         return view('admins.show')
             ->with('vendors', $vendors);
     }
-
-    public function earnings()
-    {
-        return view('admins.earnings');
-    }
-    public function landing()
-    {
-        return view('stalls.adminIndex');
-    }
+    
 }
