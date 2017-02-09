@@ -1,7 +1,8 @@
 @extends('layouts.ame-master')
 
 @section('content')
-    <div class="container">
+
+    <div class="container" >
         <div class="row" data-spy="affix" data-offset-top="50">
             <div class="col-md-12">
                 <div class="panel panel-default">
@@ -14,36 +15,53 @@
                                 <thead>
                                 <tr>
                                     <td><strong>Item</strong></td>
-                                    <td class="text-center"><strong>Price</strong></td>
-                                    <td class="text-center"><strong>Quantity</strong></td>
-                                    <td class="text-right"><strong>Totals</strong></td>
+                                    <td><strong>Nutrition</strong></td>
+                                    <td><strong>Portion</strong></td>
+                                    <td><strong>Price</strong></td>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <!-- foreach ($order->lineItems as $line) or some such thing here -->
+                                @foreach($order->ingredients as $ingredient)
+
+                                    <tr>
+                                        <td> {{$ingredient->name}}</td>
+                                        <td>
+                                            <div class="glyphicon glyphicon-info-sign arrow" title={{ $ingredient->nutrition }}></div>
+                                        </td>
+                                        <td>{{$ingredient->pivot->portion }} </td>
+                                        <td>{{$ingredient->price }} </td>
+
+
+                                    </tr>
+                                @endforeach
+
                                 <tr>
                                     <td class="thick-line"></td>
                                     <td class="thick-line"></td>
-                                    <td class="thick-line text-right"><strong>Total Nutrients:</strong></td>
-                                    <td class="thick-line text-right">$670.99</td>
+                                    <td class="thick-line text-right"><strong></strong></td>
+                                    <td class="thick-line text-right"></td>
                                 </tr>
+                                <tr>
+                                    <td class="no-line"></td>
+                                    <td class="no-line"></td>
+                                    <td class="no-line text-right"><strong>Queue Number:</strong></td>
 
+                                    <td class="no-line text-right">{{$order->id}}</td>
+                                </tr>
                                 <tr>
                                     <td class="no-line"></td>
                                     <td class="no-line"></td>
                                     <td class="no-line text-right"><strong>Total:</strong></td>
-                                    <td class="no-line text-right">$685.99</td>
+
+                                    <td class="no-line text-right">${{ $cost }}</td>
                                 </tr>
                                 </tbody>
                             </table>
                         </div>
                         <br/>
                         {{-------------BUTTONS--------}}
-                        <div class="col-sm-6">
-                            <a href="javascript:history.back()" class="btn btn-danger btn-block">Amend Changes</a>
-                        </div>
-                        <div class="col-sm-6">
-                            {{ Form::submit('Pay', ['class' => 'btn btn-success btn-block']) }}
+                        <div>
+                            <a href="{{ route('customers.index')}}" class="btn btn-danger pull-right" >Back to Home</a>
                         </div>
                     </div>
                 </div>
@@ -51,7 +69,6 @@
             </div>
 
         </div>
-
     </div>
 
 

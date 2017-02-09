@@ -43,7 +43,7 @@ class LogsController extends Controller
             $log -> delete();
         }
         Session::flash('success', 'All logs has been cleared');
-        return "ok";
+        return redirect()->route('logs.index');
 
     }
 }

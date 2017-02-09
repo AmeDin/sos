@@ -20,6 +20,7 @@
                             <th>Image</th>
                             <th>Start Promotion</th>
                             <th>End Promotion</th>
+                            <th>Price</th>
                             <th>Edit</th>
                             <th>Delete</th>
 
@@ -35,10 +36,12 @@
                                         <td><img src="{{asset('images/' . $promotion->image->url )}} " height="100" width="100"/></td>
                                         <td>{{ $promotion->start_date }}</td>
                                         <td>{{ $promotion->end_date }}</td>
+                                        <td>${{ $promotion->price }}</td>
+
                                         <td><button class="btn btn-success btn-block" onclick="location.href='{{ route('promotions.edit', $promotion->id) }}'"> Edit </button></td>
                                         <td>{!! Form::open(['route' => ['promotions.destroy', $promotion->id,], 'method' => 'DELETE']) !!}
-                                        {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-block']) !!}
-                                        {!! Form::close() !!}
+                                            {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-block']) !!}
+                                            {!! Form::close() !!}
                                         </td>
                                     </tr>
                                 @endforeach

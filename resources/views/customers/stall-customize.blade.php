@@ -41,195 +41,274 @@
             </div>
         </div>
     </div>
-<div class="row">
-    <div class="col-md-12 col-xs-12">
-        <div class="panel panel-default bg-grey-white">
-            <div class="panel-heading text-center">
-                <h2>Customize</h2>
-            </div>
-            <div class="panel panel-body text-center">
-                {{ Form::open(array('route' => 'customizeOrders.create'))   }}
-                <div class="rows">
-                    <h1 class="list-group-item list-group-item-info">Staples</h1>
-                    <div class="panel-body pad-top-five">
-                        @include('partials._message')
-
-
-                        <table class="table">
-
-                            <thead>
-                            <tr class="bg-info">
-                                <th>Name</th>
-                                <th>Nutrients</th>
-                                <th>Portion</th>
-                                <th>Price</th>
-                                <th>Add</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @if($staple->count() > 0)
-                                @foreach($staple as $indexKey => $ingredient)
-
-                                    <tr>
-                                        <th>{{ $ingredient->name }}</th>
-                                        <th><div class="glyphicon glyphicon-info-sign arrow"></div></th>
-                                        <th>{{Form::selectRange('stapleportion', 1, 3)}}</th>
-                                        <th>{{ $ingredient->price }}</th>
-                                        <th> {{ Form::checkbox('stapleadd', 'value') }}</th>
-                                    </tr>
-                                    <div class="hidden">{{ $indexKey++ }}</div>
-
-                                @endforeach
-
-                            @else
-                                <h1>No Ingredients For This Category</h1>
-                            @endif
-                            </tbody>
-                        </table>
-                    </div>
+    <div class="row">
+        <div class="col-md-12 col-xs-12">
+            <div class="panel panel-default bg-grey-white">
+                <div class="panel-heading text-center">
+                    <h2>Customize</h2>
                 </div>
+                <div class="panel panel-body text-center">
+                    {{ Form::open(array('route' => 'customizeOrders.store', 'method' => 'post'))   }}
+
+                    <div class="rows">
+                        <h1 class="list-group-item list-group-item-danger">Staple</h1>
+                        <div class="panel-body pad-top-five">
+                            @include('partials._message')
 
 
-                <div class="rows">
-                    <h1 class="list-group-item list-group-item-danger">Meat</h1>
-                    <div class="panel-body pad-top-five">
-                        @include('partials._message')
-
-
-                        <table class="table">
-
-                            <thead>
-                            <tr class="bg-danger">
-                                <th>Name</th>
-                                <th>Nutrients</th>
-                                <th>Portion</th>
-                                <th>Price</th>
-                                <th>Add</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @if($meat->count() > 0)
-                                @foreach($meat as $indexKey => $ingredient)
-
-                                    <tr>
-                                        <th>{{ $ingredient->name }}</th>
-                                        <th><div class="glyphicon glyphicon-info-sign"></div></th>
-                                        <th>{{Form::selectRange('meatportion', 1, 3)}}</th>
-                                        <th>{{ $ingredient->price }}</th>
-                                        <th> {{ Form::checkbox('meatadd', 'value') }}</th>
+                            <table class="table">
+                                @if($staple->count() > 0)
+                                    <thead>
+                                    <tr class="bg-danger">
+                                        <th>Name</th>
+                                        <th>Nutrients</th>
+                                        <th>Portion</th>
+                                        <th>Price</th>
+                                        <th>Add</th>
                                     </tr>
-                                    <div class="hidden">{{ $indexKey++ }}</div>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($staple as $indexKey => $ingredient)
 
-                                @endforeach
+                                        <tr>
+                                            <td>{{ $ingredient->name }}</td>
+                                            <td><div class="glyphicon glyphicon-info-sign"></div></td>
+                                            <td>{{Form::selectRange('portion['.$ingredient->id.']', 1, 3)}}</td>
+                                            <td>{{ $ingredient->price }}</td>
+                                            <td> {{ Form::checkbox('ingredient['.$ingredient->id.']', $ingredient->id) }}</td>
+                                        </tr>
+                                        <div class="hidden">{{ $indexKey++ }}</div>
 
-                            @else
-                                <h1>No Ingredients For This Category</h1>
-                            @endif
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                                    @endforeach
 
-
-
-                <div class="rows">
-                    <h1 class="list-group-item list-group-item-success">Vegetables</h1>
-                    <div class="panel-body pad-top-five">
-                        @include('partials._message')
-
-
-                        <table class="table">
-
-                            <thead>
-                            <tr class="bg-success">
-                                <th>Name</th>
-                                <th>Nutrients</th>
-                                <th>Portion</th>
-                                <th>Price</th>
-                                <th>Add</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                        @if($vegetable->count() > 0)
-                            @foreach($vegetable as $indexKey => $ingredient)
-
-                                <tr>
-                                    <th>{{ $ingredient->name }}</th>
-                                    <th><div class="glyphicon glyphicon-info-sign"></div></th>
-                                    <th>{{Form::selectRange('number', 1, 3)}}</th>
-                                    <th>{{ $ingredient->price }}</th>
-                                    <th> {{ Form::checkbox('name', 'value') }}</th>
-                                </tr>
-                                <div class="hidden">{{ $indexKey++ }}</div>
-
-                            @endforeach
-
-                        @else
-                            <h1>No Ingredients For This Category</h1>
-                        @endif
-                            </tbody>
+                                    @else
+                                        <h1>No Ingredients For This Category</h1>
+                                    @endif
+                                    </tbody>
                             </table>
+                        </div>
                     </div>
-                </div>
+                    <div class="rows">
+                        <h1 class="list-group-item list-group-item-info">Meat</h1>
+                        <div class="panel-body pad-top-five">
+                            @include('partials._message')
 
 
-                <div class="rows">
-                    <h1 class="list-group-item list-group-item-warning">Seafood</h1>
-                    <div class="panel-body pad-top-five">
-                        @include('partials._message')
-
-
-                        <table class="table">
-
-                            <thead>
-                            <tr class="bg-warning">
-                                <th>Name</th>
-                                <th>Nutrients</th>
-                                <th>Portion</th>
-                                <th>Price</th>
-                                <th>Add</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @if($seafood->count() > 0)
-                                @foreach($seafood as $indexKey => $ingredient)
-
-                                    <tr>
-                                        <th>{{ $ingredient->name }}</th>
-                                        <th><div class="glyphicon glyphicon-info-sign"></div></th>
-                                        <th>{{Form::selectRange('number', 1, 3)}}</th>
-                                        <th>{{ $ingredient->price }}</th>
-                                        <th> {{ Form::checkbox('name', 'value') }}</th>
+                            <table class="table">
+                                @if($meat->count() > 0)
+                                    <thead>
+                                    <tr class="bg-info">
+                                        <th>Name</th>
+                                        <th>Nutrients</th>
+                                        <th>Portion</th>
+                                        <th>Price</th>
+                                        <th>Add</th>
                                     </tr>
-                                    <div class="hidden">{{ $indexKey++ }}</div>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($meat as $indexKey => $ingredient)
 
-                                @endforeach
+                                        <tr>
+                                            <td>{{ $ingredient->name }}</td>
+                                            <td><div class="glyphicon glyphicon-info-sign"></div></td>
+                                            <td>{{Form::selectRange('portion['.$ingredient->id.']', 1, 3)}}</td>
+                                            <td>{{ $ingredient->price }}</td>
+                                            <td> {{ Form::checkbox('ingredient['.$ingredient->id.']', $ingredient->id) }}</td>
+                                        </tr>
+                                        <div class="hidden">{{ $indexKey++ }}</div>
 
-                            @else
-                                <h1>No Ingredients For This Category</h1>
-                            @endif
-                            </tbody>
-                        </table>
+                                    @endforeach
+
+                                    @else
+                                        <h1>No Ingredients For This Category</h1>
+                                    @endif
+                                    </tbody>
+                            </table>
+                        </div>
                     </div>
+
+
+
+                    <div class="rows">
+                        <h1 class="list-group-item list-group-item-success">Vegetables</h1>
+                        <div class="panel-body pad-top-five">
+                            @include('partials._message')
+
+
+                            <table class="table">
+                                @if($vegetable->count() > 0)
+                                    <thead>
+                                    <tr class="bg-success">
+                                        <th>Name</th>
+                                        <th>Nutrients</th>
+                                        <th>Portion</th>
+                                        <th>Price</th>
+                                        <th>Add</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($vegetable as $indexKey => $ingredient)
+
+                                        <tr>
+                                            <td>{{ $ingredient->name }}</td>
+                                            <td><div class="glyphicon glyphicon-info-sign"></div></td>
+                                            <td>{{Form::selectRange('portion['.$ingredient->id.']', 1, 3)}}</td>
+                                            <td>{{ $ingredient->price }}</td>
+                                            <td> {{ Form::checkbox('ingredient['.$ingredient->id.']', $ingredient->id) }}</td>
+                                        </tr>
+                                        <div class="hidden">{{ $indexKey++ }}</div>
+
+                                    @endforeach
+
+                                    @else
+                                        <h1>No Ingredients For This Category</h1>
+                                    @endif
+                                    </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+                    <div class="rows">
+                        <h1 class="list-group-item list-group-item-warning">Seafood</h1>
+                        <div class="panel-body pad-top-five">
+                            @include('partials._message')
+
+
+                            <table class="table">
+                                @if($seafood->count() > 0)
+
+                                    <thead>
+                                    <tr class="bg-warning">
+                                        <th>Name</th>
+                                        <th>Nutrients</th>
+                                        <th>Portion</th>
+                                        <th>Price</th>
+                                        <th>Add</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($seafood as $indexKey => $ingredient)
+
+                                        <tr>
+                                            <td>{{ $ingredient->name }}</td>
+                                            <td><div class="glyphicon glyphicon-info-sign"></div></td>
+                                            <td>{{Form::selectRange('portion['.$ingredient->id.']', 1, 3)}}</td>
+                                            <td>{{ $ingredient->price }}</td>
+                                            <td> {{ Form::checkbox('ingredient['.$ingredient->id.']', $ingredient->id) }}</td>
+                                        </tr>
+                                        <div class="hidden">{{ $indexKey++ }}</div>
+
+                                    @endforeach
+
+                                    @else
+                                        <h1>No Ingredients For This Category</h1>
+                                    @endif
+                                    </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+                    <div class="rows">
+                        <h1 class="list-group-item list-group-item-danger">Nuts</h1>
+                        <div class="panel-body pad-top-five">
+                            @include('partials._message')
+
+
+                            <table class="table">
+                                @if($nut->count() > 0)
+                                    <thead>
+                                    <tr class="bg-danger">
+                                        <th>Name</th>
+                                        <th>Nutrients</th>
+                                        <th>Portion</th>
+                                        <th>Price</th>
+                                        <th>Add</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    @foreach($nut as $indexKey => $ingredient)
+
+                                        <tr>
+                                            <td>{{ $ingredient->name }}</td>
+                                            <td><div class="glyphicon glyphicon-info-sign arrow"></div></td>
+                                            <td>{{Form::selectRange('portion['.$ingredient->id.']', 1, 3)}}</td>
+                                            <td>{{ $ingredient->price }}</td>
+                                            <td> {{ Form::checkbox('ingredient['.$ingredient->id.']', $ingredient->id) }}</td>
+                                        </tr>
+                                        <div class="hidden">{{ $indexKey++ }}</div>
+
+                                    @endforeach
+
+                                    @else
+                                        <h1>No Ingredients For This Category</h1>
+                                    @endif
+                                    </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="rows">
+                        <h1 class="list-group-item list-group-item-info">Sauce</h1>
+                        <div class="panel-body pad-top-five">
+                            @include('partials._message')
+
+
+                            <table class="table">
+                                @if($sauce->count() > 0)
+                                    <thead>
+                                    <tr class="bg-info">
+                                        <th>Name</th>
+                                        <th>Nutrients</th>
+                                        <th>Portion</th>
+                                        <th>Price</th>
+                                        <th>Add</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    @foreach($sauce as $indexKey => $ingredient)
+
+                                        <tr>
+                                            <td>{{ $ingredient->name }}</td>
+                                            <td><div class="glyphicon glyphicon-info-sign arrow"></div></td>
+                                            <td>{{Form::selectRange('portion['.$ingredient->id.']', 1, 3)}}</td>
+                                            <td>{{ $ingredient->price }}</td>
+                                            <td> {{ Form::checkbox('ingredient['.$ingredient->id.']', $ingredient->id) }}</td>
+                                        </tr>
+                                        <div class="hidden">{{ $indexKey++ }}</div>
+
+                                    @endforeach
+
+                                    @else
+                                        <h1>No Ingredients For This Category</h1>
+                                    @endif
+                                    </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+
+                    {{-------------BUTTONS--------}}
+                    <div class="col-sm-6">
+                        <a href="javascript:history.back()" class="btn btn-danger btn-block">Back</a>
+                    </div>
+                    <div class="col-sm-6">
+                        {{ Form::submit('Pay Now', ['class' => 'btn btn-success btn-block']) }}
+                    </div>
+
                 </div>
 
-                {{-------------BUTTONS--------}}
-                <div class="col-sm-6">
-                    <a href="javascript:history.back()" class="btn btn-danger btn-block">Back</a>
-                </div>
-                <div class="col-sm-6">
-                    {{ Form::submit('Pay Now', ['class' => 'btn btn-success btn-block']) }}
-                </div>
 
             </div>
-
 
         </div>
+    </div>
+
+    <div >
 
     </div>
-</div>
-
-<div >
-
-</div>
 @endsection

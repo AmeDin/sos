@@ -29,9 +29,12 @@ class PromotionsController extends Controller
     {
         $stall = Stall::find($id);
         $promotions = Promotion::where('stall_id', $id)->get();
+
         return view('promotions.show')
             ->with('stall', $stall)
             ->with('promotions', $promotions);
+
+
     }
     public function create()
     {
@@ -47,6 +50,7 @@ class PromotionsController extends Controller
         $promotion = new Promotion();
         $promotion->name = $request->name;
         $promotion->description = $request->description;
+        $promotion->price = $request->price;
         $promotion->start_date = $request->startdate;
         $promotion->end_date = $request->enddate;
         $promotion->stall_id = $request->stall;
@@ -73,6 +77,7 @@ class PromotionsController extends Controller
         $promotion->save();
         $log = new Log;
         $log->createLog("Promotion","Create " . $promotion->name . " promotion", Sentinel::getUser()->id);
+
         Session::flash('success', 'Promotion is successfully added');
         return redirect()->route('promotions.show', $promotion->stall_id);
     }
@@ -97,6 +102,7 @@ class PromotionsController extends Controller
         $promotions = Promotion::find($id);
 
         $promotions->name = $request->input('name');
+        $promotions->price = $request->input('price');
         $promotions->description = $request->input('description');
         $promotions->start_date = $request->input('startdate');
         $promotions->end_date = $request->input('enddate');
@@ -117,19 +123,22 @@ class PromotionsController extends Controller
         }
 
         $promotions->save();
-        Session::flash('success', 'Promotion for stall is successfully updated');
         $log = new Log;
         $log->createLog("Promotion","Edit " . $promotions->name . " promotion", Sentinel::getUser()->id);
-        return redirect()->route('promotions.show', $promotions->id);
+
+        Session::flash('success', 'Promotion for stall is successfully updated');
+        return redirect()->route('promotions.show', $promotions->stall_id);
 
     }
     public function destroy($id)
     {
         $promotions = Promotion::find($id);
+        $name = $promotions->name;
         $promotions -> delete();
-        Session::flash('success', 'Promotion is successfully deleted');
         $log = new Log;
-        $log->createLog("Promotion","Delete " . $promotions->name . " promotion", Sentinel::getUser()->id);
-        return redirect()->route('promotions.show', $promotions->id);
+        $log->createLog("Promotion","Delete " . $name . " promotion", Sentinel::getUser()->id);
+        Session::flash('success', 'Promotion is successfully deleted');
+        return redirect()->route('promotions.show', $promotions->stall_id);
     }
 }
+

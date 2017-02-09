@@ -19,6 +19,14 @@
                         </div>
                     </div>
                     <div class="form-group col-md-12 col-xs-12">
+                        {{Form::label('price','Price:')}}
+
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
+                            {{ Form::number('price', null, array('class'=>'form-control', 'placeholder'=>'Price', 'step'=>'any')) }}
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12 col-xs-12">
                         {{Form::label('description','Description:')}}
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-pencil"></i></span>

@@ -23,6 +23,7 @@ Route::get('/cstallpromotion/{id}', 'CustomerController@stallPromotion')->name('
 Route::get('/cstallcustomize/{id}', 'CustomerController@stallCustomize')->name('customers.customize');
 Route::post('/customizeOrders', 'CustomizeOrderController@create')->name('customizeOrders.create');
 Route::post('/customizeOrders/hell', 'CustomizeOrderController@store')->name('customizeOrders.store');
+Route::get('/customizeOrders/{id}', 'CustomizeOrderController@show')->name('customizeOrders.show');
 
 Route::group(['middleware' => 'visitors'], function(){
     Route::get('/register', 'RegistrationController@register');
@@ -46,16 +47,19 @@ Route::group(['middleware' => 'vendor'], function(){
 });
 
 Route::group(['middleware' => 'admin'], function(){
-    Route::get('/vendors', 'AdminController@index')->name('admins.index') /*->middleware('admin')*/;
+   // Route::get('/vendors', 'AdminController@index')->name('admins.index') /*->middleware('admin')*/;
     Route::get('/logs', 'LogsController@index')->name('logs.index');
     Route::delete('/logs', 'LogsController@destroyAll')->name('logs.destroy');
     Route::get('/logs/{id}', 'LogsController@edit')->name('logs.edit');
     Route::put('/logs/{id}', 'LogsController@update')->name('logs.update');
+    Route::resource('vendors', 'VendorController');
+    Route::post('/ingredients.receive', 'IngredientsController@receive')->name('ingredients.receive');
+    Route::resource('ingredients', 'IngredientsController');
 });
 
 Route::group(['middleware' => 'admin' || 'vendor'], function(){
     Route::post('/logout', 'LoginController@logout');
-
+    
 });
 
 Route::get('/ajaxcall/{ing_id?}',function($ing_id){

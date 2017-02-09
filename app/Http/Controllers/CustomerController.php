@@ -64,9 +64,9 @@ class CustomerController extends Controller
             ->with('meat', $ingredientsMeat)
             ->with('vegetable', $ingredientsVegetable)
             ->with('seafood', $ingredientsSeafood)
-            ->with('Nut', $ingredientsNut)
-            ->with('Sauce', $ingredientsSauce)
-            ->with('Drink', $ingredientsDrink);
+            ->with('nut', $ingredientsNut)
+            ->with('sauce', $ingredientsSauce)
+            ->with('drink', $ingredientsDrink);
 
 
     }
