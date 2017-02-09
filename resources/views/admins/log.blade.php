@@ -22,6 +22,7 @@
                             <th>Action</th>
                             <th>Triggered By</th>
                             <th>Triggered On</th>
+                            <th>Edit</th>
 
                             </thead>
                             <tbody>
@@ -33,6 +34,7 @@
                                         <td>{{ $log->action }}</td>
                                         <td>{{ $log->user()->first()->name }}</td>
                                         <td>{{ $log->created_at }}</td>
+                                        <td> <button class="btn-success" onclick="location.href='{{ route('logs.edit', $log->id) }}'"> Edit </button></td>
 
                                     </tr>
                                 @endforeach

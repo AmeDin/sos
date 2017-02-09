@@ -72,7 +72,7 @@ class PromotionsController extends Controller
 
         $promotion->save();
         $log = new Log;
-        $log->createLog("Promotion","Create " . $promotions->name . " promotion", Sentinel::getUser()->id);
+        $log->createLog("Promotion","Create " . $promotion->name . " promotion", Sentinel::getUser()->id);
         Session::flash('success', 'Promotion is successfully added');
         return redirect()->route('promotions.show', $promotion->stall_id);
     }

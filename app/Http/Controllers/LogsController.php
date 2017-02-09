@@ -16,29 +16,25 @@ class LogsController extends Controller
             ->withLogs($logs);
     }
     
-    public function store(Request $request)
-    {
-        //
-    }
-
-    
-    public function show($id)
-    {
-        //
-    }
-
     
     public function edit($id)
     {
-        //
+        $log = Log::find($id);
+        return view('admins.log-edit')->with('log',$log);
     }
 
     
     public function update(Request $request, $id)
     {
-        //
-    }
+        $log = Log::find($id);
 
+        $log->origin = $request->input('origin');
+        $log->action = $request->input('action');
+        $log->save();
+
+        Session::flash('success', 'Log is successfully updated');
+        return redirect()->route('logs.index');
+    }
     
     public function destroyAll()
     {

@@ -49,6 +49,8 @@ Route::group(['middleware' => 'admin'], function(){
     Route::get('/vendors', 'AdminController@index')->name('admins.index') /*->middleware('admin')*/;
     Route::get('/logs', 'LogsController@index')->name('logs.index');
     Route::delete('/logs', 'LogsController@destroyAll')->name('logs.destroy');
+    Route::get('/logs/{id}', 'LogsController@edit')->name('logs.edit');
+    Route::put('/logs/{id}', 'LogsController@update')->name('logs.update');
 });
 
 Route::group(['middleware' => 'admin' || 'vendor'], function(){
