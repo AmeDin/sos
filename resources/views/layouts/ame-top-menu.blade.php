@@ -34,6 +34,8 @@
                                         <li><a tabindex="-1"href="{{ route('stalls.create') }}">Create</a></li>
                                     </ul>
                             </li>
+                            <li class="divider"></li>
+                            <li><a href="{{ route('fixedOrders.index') }}"></i>My Earnings</a></li>
                             @else
                             <li><a href="{{ route('vendors.index') }}"></i>Manage Vendors</a></li>
                             <li class="divider"></li>

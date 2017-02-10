@@ -33,7 +33,6 @@
                             <th>#</th>
                             <th>Vendor Name</th>
                             <th>Email</th>
-                            <th>Stalls</th>
                             <th>Edit</th>
                             <th>Delete</th>
 
@@ -45,9 +44,6 @@
                                         <td>{{ $vendor->id }}</td>
                                         <td>{{ $vendor->name }}</td>
                                         <td>{{ $vendor->email }}</td>
-                                        <td>
-                                            <button class="btn btn-info" onclick="location.href='{{route('stalls.show',$vendor->id)}}'"> View Stalls </button>
-                                        </td>
                                         <td>
                                             <button class="btn btn-success" onclick="location.href='{{route('vendors.edit',$vendor->id)}}'"> Edit </button>
                                         </td>

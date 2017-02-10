@@ -43,6 +43,9 @@
                             @endif
                             </tbody>
                         </table>
+                        @if(! empty($logs))
+                            <div class="pull-right">{{ $logs->links() }}</div>
+                        @endif
 
                     </div>
                 </div>

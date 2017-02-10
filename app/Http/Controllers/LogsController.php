@@ -11,7 +11,7 @@ class LogsController extends Controller
     
     public function index()
     {
-        $logs = Log::all();
+        $logs = Log::paginate(10);
         return view('admins.log')
             ->withLogs($logs);
     }

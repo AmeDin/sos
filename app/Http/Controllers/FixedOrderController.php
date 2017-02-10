@@ -3,16 +3,45 @@
 namespace App\Http\Controllers;
 
 use App\Ingredient;
+use App\Stall;
 use Illuminate\Http\Request;
 use App\Dish;
 use App\FixedOrder;
 use Session;
+use Sentinel;
 
 class FixedOrderController extends Controller
 {
     public function index()
     {
-        //
+        $orderList = array();
+        $earningList = array();
+        $totalEarning = 0;
+
+        $orders = FixedOrder::with('dish')->get();
+
+        foreach ($orders as $order){
+            $stall = Stall::find($order->dish->stall_id);
+            if(Sentinel::getUser()->id == $stall->user_id) {
+                array_push($orderList, $order);
+                $cost = 0;
+                $ingredients = $order->ingredients;
+                foreach ($ingredients as $ingredient){
+                    $cost += $ingredient->price * $ingredient->pivot->quantity;
+                };
+                $totalEarning += $cost;
+                $cost=number_format($cost, 2, '.', ',');
+                array_push($earningList, $cost);
+            }
+        }
+        if(substr($totalEarning, -1)!='0'){
+            $totalEarning = $totalEarning . '0';
+        }
+
+        return view('vendors.fixed-orders.index')
+            ->with('orders',$orderList)
+            ->with('earnings', $earningList)
+            ->with('total', $totalEarning);
     }
 
     public function create($id)
@@ -105,10 +134,7 @@ class FixedOrderController extends Controller
         foreach ($ingredients as $ingredient){
             $cost += $ingredient->price * $ingredient->pivot->quantity;
         };
-        settype($cost, "string");
-        if(substr($cost, -1)!='0'){
-            $cost = $cost . '0';
-        }
+        $cost=number_format($cost, 2, '.', ',');
         return view('customers.fixed-orders.show')
             ->with('order', $order)
             ->with('cost', $cost);
