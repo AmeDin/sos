@@ -19,7 +19,7 @@
             }
         }
     </script>
-    <div class="container">
+    <div class="container col-lg-10">
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
@@ -28,7 +28,7 @@
                     </div>
                     <div class="panel-body">
                         @include('partials._message')
-                        <table class="table">
+                        <table class="table col-lg-10">
                             <thead>
                             <th>#</th>
                             <th>Vendor Name</th>
@@ -37,7 +37,7 @@
                             <th>Delete</th>
 
                             </thead>
-                            <tbody>
+                            <tbody >
                             @if(! empty($vendors))
                                 @foreach($vendors as $vendor)
                                     <tr>

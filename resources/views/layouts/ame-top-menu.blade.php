@@ -35,7 +35,22 @@
                                     </ul>
                             </li>
                             <li class="divider"></li>
-                            <li><a href="{{ route('fixedOrders.index') }}"></i>My Earnings</a></li>
+
+                                <li class="dropdown-submenu">
+
+                                    <a tabindex="-1" href="#"><i class="fa fa-caret-left force-absolute-left" aria-hidden="true" ></i>My Earnings</a>
+                                    <ul class="dropdown-menu  dropdown-alignment-center">
+                                        <li ><a tabindex="-1" href="{{ route('fixedOrders.index') }}">Fixed Order</a></li>
+                                        <li class="divider"></li>
+                                        <li><a tabindex="-1"href="{{ route('vendors.orderlist',1) }}">Customize Order</a></li>
+                                    </ul>
+                                </li>
+
+
+
+
+
+
                             @else
                             <li><a href="{{ route('vendors.index') }}"></i>Manage Vendors</a></li>
                             <li class="divider"></li>

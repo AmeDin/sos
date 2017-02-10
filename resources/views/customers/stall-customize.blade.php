@@ -10,7 +10,7 @@
             <div class="rows pull-left">
                 Portion size is depending on each food itself. Refer to table below:
 
-                <table class="table">
+                <table class="table col-lg-12">
 
                     <thead>
                     <tr class="bg-info">
@@ -56,7 +56,7 @@
                             @include('partials._message')
 
 
-                            <table class="table">
+                            <table class="table col-lg-12">
                                 @if($staple->count() > 0)
                                     <thead>
                                     <tr class="bg-danger">
@@ -94,7 +94,7 @@
                             @include('partials._message')
 
 
-                            <table class="table">
+                            <table class="table col-lg-12">
                                 @if($meat->count() > 0)
                                     <thead>
                                     <tr class="bg-info">
@@ -135,7 +135,7 @@
                             @include('partials._message')
 
 
-                            <table class="table">
+                            <table class="table col-lg-12">
                                 @if($vegetable->count() > 0)
                                     <thead>
                                     <tr class="bg-success">
@@ -175,7 +175,7 @@
                             @include('partials._message')
 
 
-                            <table class="table">
+                            <table class="table col-lg-12">
                                 @if($seafood->count() > 0)
 
                                     <thead>
@@ -216,7 +216,7 @@
                             @include('partials._message')
 
 
-                            <table class="table">
+                            <table class="table col-lg-12">
                                 @if($nut->count() > 0)
                                     <thead>
                                     <tr class="bg-danger">
@@ -256,7 +256,7 @@
                             @include('partials._message')
 
 
-                            <table class="table">
+                            <table class="table col-lg-12">
                                 @if($sauce->count() > 0)
                                     <thead>
                                     <tr class="bg-info">
@@ -297,6 +297,8 @@
                         <a href="javascript:history.back()" class="btn btn-danger btn-block">Back</a>
                     </div>
                     <div class="col-sm-6">
+                        {{Form::hidden('stall_id',$stalls->id)}}
+
                         {{ Form::submit('Pay Now', ['class' => 'btn btn-success btn-block']) }}
                     </div>
 

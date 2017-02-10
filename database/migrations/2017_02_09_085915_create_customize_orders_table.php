@@ -15,6 +15,8 @@ class CreateCustomizeOrdersTable extends Migration
     {
         Schema::create('customize_orders', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('stall_id');
+
             $table->timestamps();
 
             $table->engine = 'InnoDB';

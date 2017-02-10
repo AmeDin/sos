@@ -16,6 +16,8 @@
                         <div class="panel-body text-center">
                             <img class="img-responsive" src="{{asset('images/' . $stall->image->url)}} " height="150" width="200"/>
                             <h4><span><button class="btn-danger btn-block" onclick="location.href='{{ route('promotions.show',$stall->id) }}'"> Promotions </button></span></h4>
+                            <h4><span><button class="btn-danger btn-block" onclick="location.href='{{ route('vendors.orderlist',$stall->id) }}'"> Orders </button></span></h4>
+
                         </div>
                     </div>
                 </div>

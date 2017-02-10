@@ -1,21 +1,22 @@
 @extends('layouts.ame-master')
 
 @section('content')
-    <div class="container">
+    <div class="container col-lg-12">
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
                     <div class="panel-heading text-center">
                         <h2>Logs</h2>
                     </div>
+                    <div class="col-lg-12 col-md-offset-11 ">
+                        {!! Form::open(['route' => ['logs.destroy'], 'method' => 'DELETE']) !!}
+                        {!! Form::submit('Clear Logs', ['class' => 'btn btn-danger delete-btn pull-right']) !!}
+                        {!! Form::close() !!}
+                    </div>
                     <div class="panel-body">
                         @include('partials._message')
-                        <div class="col-md-1 col-md-offset-11">
-                            {!! Form::open(['route' => ['logs.destroy'], 'method' => 'DELETE']) !!}
-                            {!! Form::submit('Clear Logs', ['class' => 'btn btn-danger delete-btn pull-right']) !!}
-                            {!! Form::close() !!}
-                        </div>
-                        <table class="table text-center">
+
+                        <table class="table text-center ">
                             <thead>
                             <th>#</th>
                             <th>Origin</th>
@@ -43,6 +44,7 @@
                             @endif
                             </tbody>
                         </table>
+
                         @if(! empty($logs))
                             <div class="pull-right">{{ $logs->links() }}</div>
                         @endif

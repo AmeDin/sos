@@ -10,4 +10,8 @@ class CustomizeOrder extends Model
         return $this->belongsToMany('App\Ingredient')
             ->withPivot('portion');
     }
+
+    public function stall(){
+        return $this->belongsTo('App\Stall');
+    }
 }

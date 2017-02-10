@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Ingredient;
+use App\Stall;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use App\CustomizeOrder;
@@ -35,6 +36,7 @@ class CustomizeOrderController extends Controller
     public function store(Request $request)
     {
         $order = new CustomizeOrder();
+        $order->stall_id = $request->stall_id;
         $order->save();
 
         $selectedIngredients = $request->get('ingredient');
@@ -43,18 +45,17 @@ class CustomizeOrderController extends Controller
 
         foreach ($selectedIngredients as $ingIDs) {
 
-            $getingredient = Ingredient::where('id',$ingIDs)->get();
-            for($x = 0; $x < count($getingredient); $x++){
-                if ($getingredient[$x]->id = $ingIDs)
-                {
-                    $test=array_add($getingredient[$x], 'portion',$selectedPortions[$ingIDs]);
+            $getingredient = Ingredient::where('id', $ingIDs)->get();
+            for ($x = 0; $x < count($getingredient); $x++) {
+                if ($getingredient[$x]->id = $ingIDs) {
+                    $test = array_add($getingredient[$x], 'portion', $selectedPortions[$ingIDs]);
                 }
-                array_push( $arrayIngredient,$test);
+                array_push($arrayIngredient, $test);
 
             }
 
         }
-        for($x = 0; $x < count($arrayIngredient); $x++) {
+        for ($x = 0; $x < count($arrayIngredient); $x++) {
             $order->ingredients()->attach([$arrayIngredient[$x]->id => ['portion' => $arrayIngredient[$x]->portion]]);
         }
 
@@ -63,39 +64,69 @@ class CustomizeOrderController extends Controller
         return redirect()->route('customizeOrders.show', $order->id);
     }
 
+    public function showorder($id)
+    {
+        $stalls = Stall::find($id);
+        $orders = CustomizeOrder::all();
 
-//    public function create1(Request $request)
-//    {
-//        $selectedIngredients= $request->get('ingredient');
-//        $selectedPortions= $request->get('portion');
-//        $arrayIngredientDetail = array();
-//        $totalprice = 0;
-//
-//        foreach ($selectedIngredients as $ingIDs) {
-//
-//            $getingredient = Ingredient::where('id',$ingIDs)->get();
-//            for($x = 0; $x < count($getingredient); $x++){
-//                if ($getingredient[$x]->id = $ingIDs)
-//                {
-//                    $getportionprice= $getingredient[$x]->price * $selectedPortions[$ingIDs];
-//                    $getportionprice1=number_format($getportionprice, 2, '.', ',');
-//                    $test=array_add($getingredient[$x], 'portion',$selectedPortions[$ingIDs]);
-//                    array_set($getingredient[$x], 'price', $getportionprice1);
-//                }
-//             array_push( $arrayIngredientDetail,$test);
-//            }
+
+        $eachorder=array();
+            foreach( $orders as $order) {
+                $orderlist = CustomizeOrder::where('stall_id', $id)->where('id', $order->id)->get();
+                array_push($eachorder, $orderlist);
+                $cost1 = 0;
+                $totalcost1=0;
+                foreach ($orderlist as $list){
+                    $ingredients= $list->ingredients;
+                    foreach ($ingredients as $ingredient){
+                        $cost1 += $ingredient->price * $ingredient->pivot->portion;
+                        $cost=number_format($cost1, 2, '.', ',');
+
+
+
+
+                    } $totalcost1+= $totalcost1 + $cost1;
+                    $totalcost=number_format($totalcost1, 2, '.', ',');
+                }
+
+            }
+
+
+
+
+
+        return view('vendors.orderlist')
+        ->with('order', $eachorder)
+        ->with('price', $cost)
+        ->with('totalprice', $totalcost)
+         ->withStalls($stalls);
+
+
+
+
+
+
+//        foreach( $orders as $order)
+//        {
+//            $orderlist = CustomizeOrder::where('id',$order)->get();
 //        }
-//        if( count($arrayIngredientDetail) > 0){
-//            foreach($arrayIngredientDetail as $ingredient){
-//                $totalprice += $ingredient->price;
-//                $totalprice1=number_format($totalprice, 2, '.', ',');
-//            }
-//    }
-//        return view('customers.customize-orders.ordersummary')
-//            ->with('arrayIngredientDetail', $arrayIngredientDetail)
-//        ->with('totalprice1', $totalprice1);
+
+//        $order = CustomizeOrder::all();
+//        $cost1 = 0;
+//        $ingredient = $order->ingredients;
 //
-//    }
+//
+//        foreach ($ingredients as $ingredient){
+//            $cost1 += $ingredient->price * $ingredient->pivot->portion;
+//            $cost=number_format($cost1, 2, '.', ',');
+//        };
+//
+//        return view('customers.customize-orders.ordersummary')
+//            ->with('order', $order)
+//            ->with('cost', $cost);
+    }
+
+
 
 
 }

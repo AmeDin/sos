@@ -44,7 +44,7 @@ Route::group(['middleware' => 'vendor'], function(){
     Route::resource('promotions', 'PromotionsController');
     Route::resource('dishes', 'DishesController');
     Route::get('/fixedOrders', 'FixedOrderController@index')->name('fixedOrders.index');
-
+    Route::get('/orderlist/{id}', 'CustomizeOrderController@showorder')->name('vendors.orderlist');
 });
 
 Route::group(['middleware' => 'admin'], function(){
